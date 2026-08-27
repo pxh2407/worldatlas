@@ -63,6 +63,9 @@
 
         var ISO_URL = "https://raw.githubusercontent.com/mledoze/countries/master/countries.json";
 
+        function cap(s) {
+          return (typeof s === "string" && s.length) ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+        }
         function localize(list, isoMap) {
           if (!Array.isArray(list)) return list;
           for (var i = 0; i < list.length; i++) {
@@ -70,8 +73,8 @@
             if (!c || typeof c !== "object") continue;
             var ita = c.translations && c.translations.ita;
             if (ita && c.name) {
-              if (ita.common) c.name.common = ita.common;
-              if (ita.official) c.name.official = ita.official;
+              if (ita.common) c.name.common = cap(ita.common);
+              if (ita.official) c.name.official = cap(ita.official);
             }
             if (c.region && REGION[c.region]) c.region = REGION[c.region];
             if (c.subregion && SUBREGION[c.subregion]) c.subregion = SUBREGION[c.subregion];
@@ -87,27 +90,44 @@
         // Caricamento condiviso del dataset: costruisce la mappa codice ISO -> nome IT
         // e localizza l'elenco. Usato sia dai dati paese sia dai nomi sulla mappa,
         // indipendentemente dall'ordine con cui l'app li richiede.
+        var IT = LANG === "it";
         var _fetch = window.fetch ? window.fetch.bind(window) : null;
         var countriesPromise = null;
+
+        // Regione del dataset -> etichetta continente usata dall'app (valori italiani)
+        function bucket(region) {
+          return ({ "Africa": "Africa", "Americas": "Americhe", "Asia": "Asia",
+                    "Europe": "Europa", "Oceania": "Oceania" })[region] || "Mondo";
+        }
+
         function loadCountries() {
           if (!countriesPromise) {
             countriesPromise = _fetch(ISO_URL).then(function (r) { return r.json(); }).then(function (list) {
-              var iso = {}, byName = {};
+              var iso = {}, byName = {}, cont = {};
               for (var i = 0; i < list.length; i++) {
                 var c = list[i];
-                var it = c && c.translations && c.translations.ita && c.translations.ita.common;
+                if (!c) continue;
+                var it = c.translations && c.translations.ita && c.translations.ita.common;
+                if (it) it = cap(it);
+                var en = c.name && c.name.common;
+                var region = bucket(c.region);
+                // Mappa continenti COMPLETA: sotto ogni nome possibile (IT ed EN)
+                var names = [it, en, c.name && c.name.official];
+                if (it && c.translations.ita.official) names.push(c.translations.ita.official);
+                if (Array.isArray(c.altSpellings)) names = names.concat(c.altSpellings);
+                for (var n = 0; n < names.length; n++) if (names[n]) cont[names[n]] = region;
+                // Mappe per la traduzione IT dei nomi (dossier + mappa)
                 if (!it) continue;
                 if (c.cca3) iso[c.cca3] = it;
-                if (c.name) {
-                  if (c.name.common) byName[c.name.common] = it;
-                  if (c.name.official) byName[c.name.official] = it;
-                }
+                if (en) byName[en] = it;
+                if (c.name && c.name.official) byName[c.name.official] = it;
                 if (Array.isArray(c.altSpellings)) {
                   for (var a = 0; a < c.altSpellings.length; a++) byName[c.altSpellings[a]] = it;
                 }
               }
-              localize(list, iso);
-              return { list: list, iso: iso, byName: byName };
+              window.__waCont = cont;
+              if (IT) localize(list, iso);
+              return { list: list, iso: iso, byName: byName, cont: cont };
             });
           }
           return countriesPromise;
@@ -117,31 +137,36 @@
                    text: function () { return Promise.resolve(JSON.stringify(obj)); } };
         }
 
-        if (LANG === "it" && _fetch) {
+        // Intercetta in ENTRAMBE le lingue: serve i dati (localizzati solo in IT) e
+        // garantisce che la mappa continenti (window.__waCont) sia pronta prima
+        // che l'elenco venga disegnato.
+        if (_fetch) {
           window.fetch = function (input, init) {
             var url = typeof input === "string" ? input : (input && input.url) || "";
-            // Dati paese (dataset mledoze): elenco già localizzato
+            // Dati paese (dataset mledoze)
             if (url.indexOf("mledoze") !== -1) {
               return loadCountries().then(function (r) { return fakeJson(r.list); })
                 .catch(function () { return _fetch(input, init); });
             }
-            // Nomi sulla mappa (GeoJSON): traduce feature.properties.name via codice ISO
+            // Nomi sulla mappa (GeoJSON): in IT traduce i nomi via codice ISO
             if (url.indexOf("geo-countries") !== -1 || url.indexOf(".geojson") !== -1) {
               return _fetch(input, init).then(function (res) {
                 return res.json().then(function (geo) {
                   return loadCountries().then(function (r) {
-                    try {
-                      var feats = geo && geo.features ? geo.features : [];
-                      for (var i = 0; i < feats.length; i++) {
-                        var p = feats[i] && feats[i].properties;
-                        if (!p) continue;
-                        var code = p["ISO3166-1-Alpha-3"] || p.ISO_A3;
-                        var it = (code && r.iso[code]) || (p.name && r.byName[p.name]);
-                        if (it) p.name = it;
-                      }
-                    } catch (e) {}
+                    if (IT) {
+                      try {
+                        var feats = geo && geo.features ? geo.features : [];
+                        for (var i = 0; i < feats.length; i++) {
+                          var p = feats[i] && feats[i].properties;
+                          if (!p) continue;
+                          var code = p["ISO3166-1-Alpha-3"] || p.ISO_A3;
+                          var itn = (code && r.iso[code]) || (p.name && r.byName[p.name]);
+                          if (itn) p.name = itn;
+                        }
+                      } catch (e) {}
+                    }
                     return fakeJson(geo);
-                  });
+                  }).catch(function () { return fakeJson(geo); });
                 }).catch(function () { return res; });
               });
             }
