@@ -100,6 +100,10 @@
                     "Europe": "Europa", "Oceania": "Oceania" })[region] || "Mondo";
         }
 
+        // Popolazione per codice ISO3 (fonte World Bank 2024 + integrazioni), assente
+        // nel dataset dei paesi: la iniettiamo così l'app mostra il numero di abitanti.
+        var POP = {"ABW":107995,"AFG":42647492,"AGO":37885849,"ALB":2377128,"AND":81938,"ARE":10986400,"ARG":45696159,"ARM":3033500,"ASM":46765,"ATG":93772,"AUS":27196812,"AUT":9177982,"AZE":10202830,"BDI":14047786,"BEL":11858610,"BEN":14462724,"BFA":23548781,"BGD":173562364,"BGR":6441421,"BHR":1588670,"BHS":401283,"BIH":3164253,"BLR":9132629,"BLZ":417072,"BMU":64636,"BOL":12413315,"BRA":211998573,"BRB":282467,"BRN":462721,"BTN":791524,"BWA":2521139,"CAF":5330690,"CAN":41288599,"CHE":9005582,"CHL":19764771,"CHN":1408975000,"CIV":31934230,"CMR":29123744,"COD":109276265,"COG":6332961,"COL":52886363,"COM":866628,"CPV":524877,"CRI":5129910,"CUB":10979783,"CUW":155967,"CYM":74457,"CYP":1358282,"CZE":10905028,"DEU":83516593,"DJI":1168722,"DMA":66205,"DNK":5976992,"DOM":11427557,"DZA":46814308,"ECU":18135478,"EGY":116538258,"ERI":3535603,"ESP":48848840,"EST":1372341,"ETH":132059767,"FIN":5619911,"FJI":928784,"FRA":68551653,"FRO":54681,"FSM":113160,"GAB":2538952,"GBR":69226000,"GEO":3699557,"GHA":34427414,"GIB":39329,"GIN":14754785,"GMB":2759988,"GNB":2201352,"GNQ":1892516,"GRC":10405134,"GRD":117207,"GRL":56836,"GTM":18406359,"GUM":167777,"GUY":831087,"HKG":7524100,"HND":10825703,"HRV":3866200,"HTI":11772557,"HUN":9562065,"IDN":283487931,"IMN":84160,"IND":1450935791,"IRL":5395790,"IRN":91567738,"IRQ":46042015,"ISL":386506,"ISR":9974400,"ITA":58952704,"JAM":2839175,"JOR":11552876,"JPN":123975371,"KAZ":20592571,"KEN":56432944,"KGZ":7221868,"KHM":17638801,"KIR":134518,"KNA":46843,"KOR":51751065,"KWT":4897263,"LAO":7769819,"LBN":5805962,"LBR":5612817,"LBY":7381023,"LCA":179744,"LIE":40450,"LKA":21916000,"LSO":2337423,"LTU":2888278,"LUX":677012,"LVA":1866124,"MAC":687000,"MAF":26129,"MAR":38081173,"MCO":38631,"MDA":2402306,"MDG":31964956,"MDV":527799,"MEX":130861007,"MHL":37548,"MKD":1824359,"MLI":24478595,"MLT":568847,"MMR":54500091,"MNE":623525,"MNG":3524788,"MNP":44278,"MOZ":34631766,"MRT":5169395,"MUS":1245779,"MWI":21655286,"MYS":35557673,"NAM":3030131,"NCL":292639,"NER":27032412,"NGA":232679478,"NIC":6916140,"NLD":17993485,"NOR":5572279,"NPL":29651054,"NRU":11947,"NZL":5287500,"OMN":5281538,"PAK":251269164,"PAN":4515577,"PER":34217848,"PHL":115843670,"PLW":17695,"PNG":10576502,"POL":36559233,"PRI":3203295,"PRK":26498823,"PRT":10694681,"PRY":6929153,"PSE":5289152,"PYF":281807,"QAT":2857822,"ROU":19051804,"RUS":143533851,"RWA":14256567,"SAU":35300280,"SDN":50448963,"SEN":18501984,"SGP":6036860,"SLB":819198,"SLE":8642022,"SLV":6338193,"SMR":33977,"SOM":19009151,"SRB":6586476,"SSD":11943408,"STP":235536,"SUR":634431,"SVK":5422069,"SVN":2127400,"SWE":10569709,"SWZ":1242822,"SXM":43350,"SYC":121354,"SYR":24672760,"TCA":46535,"TCD":20299123,"TGO":9515236,"THA":71668011,"TJK":10590927,"TKM":7494498,"TLS":1400638,"TON":104175,"TTO":1368333,"TUN":12277109,"TUR":85518661,"TUV":9646,"TZA":68560157,"UGA":50015092,"UKR":37860221,"URY":3386588,"USA":340110988,"UZB":36361859,"VCT":100616,"VEN":28405543,"VGB":39471,"VIR":104377,"VNM":100987686,"VUT":327777,"WSM":218019,"YEM":40583164,"ZAF":64007187,"ZMB":21314956,"ZWE":16634373,"UNK":1594353,"TWN":23400000,"VAT":800,"ESH":576000,"REU":873000,"GLP":384000,"MTQ":360000,"GUF":291000,"MYT":280000,"JEY":103000,"GGY":63000,"ALA":30000,"FLK":3800,"COK":15000,"NIU":1900,"SPM":6000,"BES":27000,"BLM":10000,"SHN":5300,"MSR":4400,"TKL":1900,"WLF":11000,"NFK":2100,"CXR":1700,"CCK":600,"PCN":40};
+
         function loadCountries() {
           if (!countriesPromise) {
             countriesPromise = _fetch(ISO_URL).then(function (r) { return r.json(); }).then(function (list) {
@@ -107,6 +111,8 @@
               for (var i = 0; i < list.length; i++) {
                 var c = list[i];
                 if (!c) continue;
+                // Inietta la popolazione (assente nel dataset) — usata in IT ed EN
+                if (c.cca3 && POP[c.cca3] && !c.population) c.population = POP[c.cca3];
                 var it = c.translations && c.translations.ita && c.translations.ita.common;
                 if (it) it = cap(it);
                 var en = c.name && c.name.common;
@@ -345,6 +351,20 @@
       .wa-lang button:hover { background: rgba(255, 255, 255, 0.12); }
       .wa-lang button.on { background: #f4f5f7; color: #14161c; }
       .wa-lang button:focus-visible { outline: 2px solid #7aa2ff; outline-offset: 2px; }
+
+      /* Leggibilità pannello destro (dossier): testo più grande e contrastato */
+      aside.dossier .dossier-facts { gap: 20px 24px !important; padding: 22px 0 !important; }
+      aside.dossier .dossier-facts > div { gap: 5px !important; }
+      aside.dossier .dossier-facts span { font-size: 12px !important; color: #4f5d49 !important; letter-spacing: .09em !important; }
+      aside.dossier .dossier-facts strong { font-size: 21px !important; line-height: 1.15 !important; }
+      aside.dossier .dossier-note { font-size: 16.5px !important; line-height: 1.75 !important; color: #3d4657 !important; }
+      aside.dossier .dossier-region { font-size: 14px !important; letter-spacing: .06em !important; }
+      aside.dossier .dossier-extra { gap: 9px !important; padding: 16px 0 18px !important; }
+      aside.dossier .dossier-extra span { font-size: 11px !important; color: #4f5d49 !important; }
+      aside.dossier .dossier-extra strong { font-size: 14.5px !important; line-height: 1.5 !important; }
+      aside.dossier .dossier-more span { font-size: .74rem !important; color: #46556a !important; }
+      aside.dossier .dossier-more strong { font-size: .97rem !important; }
+      aside.dossier .dossier-code { font-size: 11px !important; }
 
       /* Manina che punta piu piccola sulle nazioni (hotspot sulla punta del dito) */
       .country-shape {
