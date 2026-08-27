@@ -171,7 +171,13 @@
                         // Correzione codice mancante/collidente (sempre, IT ed EN)
                         if (!code || code === "-99") {
                           var fixed = p.name && r.n2c[p.name];
-                          if (fixed) { p["ISO3166-1-Alpha-3"] = fixed; code = fixed; }
+                          if (fixed) {
+                            // Paese vero: assegna il codice ISO corretto
+                            p["ISO3166-1-Alpha-3"] = fixed; code = fixed;
+                          } else {
+                            // Territorio non-Stato: codice unico per evitare collisioni
+                            code = "ZZ" + i; p["ISO3166-1-Alpha-3"] = code;
+                          }
                         }
                         // Traduzione nome (solo IT)
                         if (IT) {
