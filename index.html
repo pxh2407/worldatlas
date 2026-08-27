@@ -9,6 +9,196 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="World Atlas Explorer — Atlante interattivo" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- ===== Opzione lingua dati IT/EN (aggiunta post-Manus) =====
+         In modalità italiano intercetta il dataset dei paesi e sostituisce
+         nomi, denominazioni ufficiali, regioni/sottoregioni e lingue con le
+         versioni italiane già presenti nei dati. L'abbinamento con la mappa
+         avviene per codice ISO, quindi la traduzione non altera la logica. -->
+    <script>
+      (function () {
+        var LANG = "it";
+        try { LANG = localStorage.getItem("wa_lang") || "it"; } catch (e) {}
+        document.documentElement.lang = LANG;
+
+        var REGION = {
+          "Africa": "Africa", "Americas": "Americhe", "Asia": "Asia",
+          "Europe": "Europa", "Oceania": "Oceania", "Antarctic": "Antartide"
+        };
+        var SUBREGION = {
+          "Northern Africa": "Africa settentrionale", "Eastern Africa": "Africa orientale",
+          "Middle Africa": "Africa centrale", "Western Africa": "Africa occidentale",
+          "Southern Africa": "Africa australe",
+          "Northern America": "America settentrionale", "Central America": "America centrale",
+          "Caribbean": "Caraibi", "South America": "America meridionale",
+          "Central Asia": "Asia centrale", "Eastern Asia": "Asia orientale",
+          "South-Eastern Asia": "Asia sud-orientale", "Southern Asia": "Asia meridionale",
+          "Western Asia": "Asia occidentale",
+          "Eastern Europe": "Europa orientale", "Northern Europe": "Europa settentrionale",
+          "Southern Europe": "Europa meridionale", "Western Europe": "Europa occidentale",
+          "Australia and New Zealand": "Australia e Nuova Zelanda",
+          "Melanesia": "Melanesia", "Micronesia": "Micronesia", "Polynesia": "Polinesia"
+        };
+        var LANGN = {
+          "Italian": "Italiano", "English": "Inglese", "French": "Francese",
+          "German": "Tedesco", "Spanish": "Spagnolo", "Portuguese": "Portoghese",
+          "Russian": "Russo", "Arabic": "Arabo", "Chinese": "Cinese",
+          "Mandarin": "Mandarino", "Japanese": "Giapponese", "Korean": "Coreano",
+          "Dutch": "Olandese", "Greek": "Greco", "Turkish": "Turco",
+          "Polish": "Polacco", "Swedish": "Svedese", "Norwegian": "Norvegese",
+          "Danish": "Danese", "Finnish": "Finlandese", "Czech": "Ceco",
+          "Hungarian": "Ungherese", "Romanian": "Rumeno", "Bulgarian": "Bulgaro",
+          "Croatian": "Croato", "Serbian": "Serbo", "Ukrainian": "Ucraino",
+          "Hindi": "Hindi", "Bengali": "Bengalese", "Urdu": "Urdu",
+          "Persian": "Persiano", "Hebrew": "Ebraico", "Thai": "Thailandese",
+          "Vietnamese": "Vietnamita", "Indonesian": "Indonesiano", "Malay": "Malese",
+          "Swahili": "Swahili", "Amharic": "Amarico", "Somali": "Somalo",
+          "Albanian": "Albanese", "Armenian": "Armeno", "Georgian": "Georgiano",
+          "Icelandic": "Islandese", "Irish": "Irlandese", "Latvian": "Lettone",
+          "Lithuanian": "Lituano", "Estonian": "Estone", "Slovak": "Slovacco",
+          "Slovene": "Sloveno", "Macedonian": "Macedone", "Maltese": "Maltese",
+          "Mongolian": "Mongolo", "Nepali": "Nepalese", "Burmese": "Birmano",
+          "Khmer": "Khmer", "Lao": "Lao", "Sinhala": "Singalese", "Tamil": "Tamil"
+        };
+
+        var ISO_URL = "https://raw.githubusercontent.com/mledoze/countries/master/countries.json";
+
+        function localize(list, isoMap) {
+          if (!Array.isArray(list)) return list;
+          for (var i = 0; i < list.length; i++) {
+            var c = list[i];
+            if (!c || typeof c !== "object") continue;
+            var ita = c.translations && c.translations.ita;
+            if (ita && c.name) {
+              if (ita.common) c.name.common = ita.common;
+              if (ita.official) c.name.official = ita.official;
+            }
+            if (c.region && REGION[c.region]) c.region = REGION[c.region];
+            if (c.subregion && SUBREGION[c.subregion]) c.subregion = SUBREGION[c.subregion];
+            if (c.languages && typeof c.languages === "object") {
+              for (var k in c.languages) {
+                if (LANGN[c.languages[k]]) c.languages[k] = LANGN[c.languages[k]];
+              }
+            }
+          }
+          return list;
+        }
+
+        // Caricamento condiviso del dataset: costruisce la mappa codice ISO -> nome IT
+        // e localizza l'elenco. Usato sia dai dati paese sia dai nomi sulla mappa,
+        // indipendentemente dall'ordine con cui l'app li richiede.
+        var _fetch = window.fetch ? window.fetch.bind(window) : null;
+        var countriesPromise = null;
+        function loadCountries() {
+          if (!countriesPromise) {
+            countriesPromise = _fetch(ISO_URL).then(function (r) { return r.json(); }).then(function (list) {
+              var iso = {}, byName = {};
+              for (var i = 0; i < list.length; i++) {
+                var c = list[i];
+                var it = c && c.translations && c.translations.ita && c.translations.ita.common;
+                if (!it) continue;
+                if (c.cca3) iso[c.cca3] = it;
+                if (c.name) {
+                  if (c.name.common) byName[c.name.common] = it;
+                  if (c.name.official) byName[c.name.official] = it;
+                }
+                if (Array.isArray(c.altSpellings)) {
+                  for (var a = 0; a < c.altSpellings.length; a++) byName[c.altSpellings[a]] = it;
+                }
+              }
+              localize(list, iso);
+              return { list: list, iso: iso, byName: byName };
+            });
+          }
+          return countriesPromise;
+        }
+        function fakeJson(obj) {
+          return { ok: true, status: 200, json: function () { return Promise.resolve(obj); },
+                   text: function () { return Promise.resolve(JSON.stringify(obj)); } };
+        }
+
+        if (LANG === "it" && _fetch) {
+          window.fetch = function (input, init) {
+            var url = typeof input === "string" ? input : (input && input.url) || "";
+            // Dati paese (dataset mledoze): elenco già localizzato
+            if (url.indexOf("mledoze") !== -1) {
+              return loadCountries().then(function (r) { return fakeJson(r.list); })
+                .catch(function () { return _fetch(input, init); });
+            }
+            // Nomi sulla mappa (GeoJSON): traduce feature.properties.name via codice ISO
+            if (url.indexOf("geo-countries") !== -1 || url.indexOf(".geojson") !== -1) {
+              return _fetch(input, init).then(function (res) {
+                return res.json().then(function (geo) {
+                  return loadCountries().then(function (r) {
+                    try {
+                      var feats = geo && geo.features ? geo.features : [];
+                      for (var i = 0; i < feats.length; i++) {
+                        var p = feats[i] && feats[i].properties;
+                        if (!p) continue;
+                        var code = p["ISO3166-1-Alpha-3"] || p.ISO_A3;
+                        var it = (code && r.iso[code]) || (p.name && r.byName[p.name]);
+                        if (it) p.name = it;
+                      }
+                    } catch (e) {}
+                    return fakeJson(geo);
+                  });
+                }).catch(function () { return res; });
+              });
+            }
+            return _fetch(input, init);
+          };
+        }
+
+        // Interruttore lingua IT / EN
+        function setLang(l) {
+          try { localStorage.setItem("wa_lang", l); } catch (e) {}
+          location.reload();
+        }
+        window.__waSetLang = setLang;
+        document.addEventListener("DOMContentLoaded", function () {
+          var box = document.createElement("div");
+          box.className = "wa-lang";
+          box.setAttribute("role", "group");
+          box.setAttribute("aria-label", "Lingua dei dati / Data language");
+          var langs = [["it", "IT"], ["en", "EN"]];
+          for (var i = 0; i < langs.length; i++) {
+            (function (code, label) {
+              var b = document.createElement("button");
+              b.type = "button";
+              b.textContent = label;
+              b.title = code === "it" ? "Dati in italiano" : "Data in English";
+              if (LANG === code) { b.className = "on"; b.setAttribute("aria-pressed", "true"); }
+              else { b.setAttribute("aria-pressed", "false"); }
+              b.addEventListener("click", function () { if (LANG !== code) setLang(code); });
+              box.appendChild(b);
+            })(langs[i][0], langs[i][1]);
+          }
+          document.body.appendChild(box);
+        });
+      })();
+    </script>
+    <style>
+      .wa-lang {
+        position: fixed; top: 14px; right: 14px; z-index: 99999;
+        display: flex; gap: 2px; padding: 3px;
+        border-radius: 999px;
+        background: rgba(20, 22, 28, 0.72);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      .wa-lang button {
+        border: 0; cursor: pointer; min-width: 40px;
+        padding: 7px 12px; border-radius: 999px;
+        font-size: 14px; font-weight: 700; letter-spacing: .04em;
+        color: #e8eaf0; background: transparent; line-height: 1;
+        transition: background .15s, color .15s;
+      }
+      .wa-lang button:hover { background: rgba(255, 255, 255, 0.12); }
+      .wa-lang button.on { background: #f4f5f7; color: #14161c; }
+      .wa-lang button:focus-visible { outline: 2px solid #7aa2ff; outline-offset: 2px; }
+    </style>
+
     <script type="module" crossorigin src="./assets/index-DEgMUMx6.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-U0U4q8Jf.css" />
   </head>
