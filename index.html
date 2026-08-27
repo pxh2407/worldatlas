@@ -103,7 +103,7 @@
         function loadCountries() {
           if (!countriesPromise) {
             countriesPromise = _fetch(ISO_URL).then(function (r) { return r.json(); }).then(function (list) {
-              var iso = {}, byName = {}, cont = {};
+              var iso = {}, byName = {}, cont = {}, n2c = {};
               for (var i = 0; i < list.length; i++) {
                 var c = list[i];
                 if (!c) continue;
@@ -116,6 +116,14 @@
                 if (it && c.translations.ita.official) names.push(c.translations.ita.official);
                 if (Array.isArray(c.altSpellings)) names = names.concat(c.altSpellings);
                 for (var n = 0; n < names.length; n++) if (names[n]) cont[names[n]] = region;
+                // Mappa nome (EN) -> codice ISO3, per correggere le feature con codice "-99"
+                if (c.cca3) {
+                  if (en) n2c[en] = c.cca3;
+                  if (c.name && c.name.official) n2c[c.name.official] = c.cca3;
+                  if (Array.isArray(c.altSpellings)) {
+                    for (var s = 0; s < c.altSpellings.length; s++) if (c.altSpellings[s]) n2c[c.altSpellings[s]] = c.cca3;
+                  }
+                }
                 // Mappe per la traduzione IT dei nomi (dossier + mappa)
                 if (!it) continue;
                 if (c.cca3) iso[c.cca3] = it;
@@ -127,7 +135,7 @@
               }
               window.__waCont = cont;
               if (IT) localize(list, iso);
-              return { list: list, iso: iso, byName: byName, cont: cont };
+              return { list: list, iso: iso, byName: byName, cont: cont, n2c: n2c };
             });
           }
           return countriesPromise;
@@ -148,23 +156,30 @@
               return loadCountries().then(function (r) { return fakeJson(r.list); })
                 .catch(function () { return _fetch(input, init); });
             }
-            // Nomi sulla mappa (GeoJSON): in IT traduce i nomi via codice ISO
+            // Mappa (GeoJSON): corregge i codici ISO fasulli ("-99") in base al nome
+            // così il dossier al clic abbina il Paese giusto; in IT traduce i nomi.
             if (url.indexOf("geo-countries") !== -1 || url.indexOf(".geojson") !== -1) {
               return _fetch(input, init).then(function (res) {
                 return res.json().then(function (geo) {
                   return loadCountries().then(function (r) {
-                    if (IT) {
-                      try {
-                        var feats = geo && geo.features ? geo.features : [];
-                        for (var i = 0; i < feats.length; i++) {
-                          var p = feats[i] && feats[i].properties;
-                          if (!p) continue;
-                          var code = p["ISO3166-1-Alpha-3"] || p.ISO_A3;
+                    try {
+                      var feats = geo && geo.features ? geo.features : [];
+                      for (var i = 0; i < feats.length; i++) {
+                        var p = feats[i] && feats[i].properties;
+                        if (!p) continue;
+                        var code = p["ISO3166-1-Alpha-3"] || p.ISO_A3;
+                        // Correzione codice mancante/collidente (sempre, IT ed EN)
+                        if (!code || code === "-99") {
+                          var fixed = p.name && r.n2c[p.name];
+                          if (fixed) { p["ISO3166-1-Alpha-3"] = fixed; code = fixed; }
+                        }
+                        // Traduzione nome (solo IT)
+                        if (IT) {
                           var itn = (code && r.iso[code]) || (p.name && r.byName[p.name]);
                           if (itn) p.name = itn;
                         }
-                      } catch (e) {}
-                    }
+                      }
+                    } catch (e) {}
                     return fakeJson(geo);
                   }).catch(function () { return fakeJson(geo); });
                 }).catch(function () { return res; });
