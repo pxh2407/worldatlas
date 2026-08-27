@@ -174,6 +174,108 @@
           };
         }
 
+        // ===== Traduzione dell'interfaccia in EN =====
+        // Le scritte fisse dell'app sono in italiano nel bundle. In modalità EN
+        // le sostituiamo a livello di DOM (dossier, note, intestazioni, chip),
+        // seguendo i cambi di Paese tramite MutationObserver.
+        if (!IT) {
+          var DICT = {
+            "Un inventario del mondo": "An inventory of the world",
+            "Traccia una rotta.": "Chart a course.",
+            "Apri un Paese.": "Open a country.",
+            "Una carta interattiva per orientarsi tra confini, continenti e piccole coordinate. Scegli una forma, oppure lascia che sia la curiosità a guidarti.":
+              "An interactive map to find your way among borders, continents and small coordinates. Pick a shape, or let curiosity be your guide.",
+            "Carta politica": "Political map",
+            "Il mondo, a colpo d’occhio": "The world at a glance",
+            "Coordinate come strumento narrativo": "Coordinates as a narrative tool",
+            "PROIEZIONE MERCATOR · NORD IN ALTO": "MERCATOR PROJECTION · NORTH UP",
+            "TRASCINA PER PANORAMICA · ROTELLA PER ZOOM": "DRAG TO PAN · WHEEL TO ZOOM",
+            "Caricamento carta…": "Loading map…",
+            "La carta non è disponibile al momento.": "The map is not available right now.",
+            "Mappa politica interattiva del mondo. Trascina per spostarti, usa la rotella o i controlli per ingrandire.":
+              "Interactive political map of the world. Drag to move, use the wheel or the controls to zoom.",
+            "Stato sovrano": "Sovereign state",
+            "Stato indipendente": "Independent state",
+            "Territorio dipendente": "Dependent territory",
+            "Dossier selezionato": "Selected dossier",
+            "Nota": "Note",
+            "aperta": "open",
+            "in attesa": "pending",
+            "Roma": "Rome",
+            "Il Cairo": "Cairo",
+            "CAPITALE": "CAPITAL",
+            "POPOLAZIONE": "POPULATION",
+            "VALUTA": "CURRENCY",
+            "SUPERFICIE": "AREA",
+            "LINGUE": "LANGUAGES",
+            "NOME UFFICIALE": "OFFICIAL NAME",
+            "SOTTOREGIONE": "SUBREGION",
+            "PREFISSO TELEFONICO": "CALLING CODE",
+            "FUSI ORARI": "TIME ZONES",
+            "DOMINIO INTERNET": "INTERNET DOMAIN",
+            "CONFINI TERRESTRI": "LAND BORDERS",
+            "Stato membro ONU": "UN member state",
+            "Capitale non disponibile": "Capital not available",
+            "La selezione resta ancorata alla carta mentre esplori.": "The selection stays anchored to the map as you explore.",
+            "Indice geografico": "Geographic index",
+            "Trova il tuo punto di partenza.": "Find your starting point.",
+            "Una mappa aperta alla curiosità.": "A map open to curiosity.",
+            "Tutti": "All",
+            "risultati": "results",
+            "Americhe": "Americas",
+            "Europa": "Europe",
+            "Mondo": "World",
+            "Italia": "Italy",
+            "Una penisola mediterranea attraversata da Alpi e Appennini, con una straordinaria densità di paesaggi e patrimoni culturali.":
+              "A Mediterranean peninsula crossed by the Alps and the Apennines, with an extraordinary density of landscapes and cultural heritage.",
+            "Arcipelago del Pacifico dove coste, montagne vulcaniche e città ad alta densità convivono in equilibrio dinamico.":
+              "A Pacific archipelago where coastlines, volcanic mountains and high-density cities coexist in dynamic balance.",
+            "Il Paese più esteso dell’America meridionale, attraversato da grandi bacini fluviali e da ecosistemi molto diversi.":
+              "The largest country in South America, crossed by great river basins and very diverse ecosystems.",
+            "Un continente-isola di grandi contrasti, dalla fascia costiera abitata ai deserti e alle terre rosse dell’interno.":
+              "An island-continent of great contrasts, from the inhabited coastal belt to the deserts and red earth of the interior.",
+            "Un corridoio fertile lungo il Nilo connette il Mediterraneo all’Africa nord-orientale e a una storia millenaria.":
+              "A fertile corridor along the Nile connects the Mediterranean to north-eastern Africa and a millennia-old history.",
+            "Seleziona un Paese sulla mappa per aprire una nota geografica e orientarti tra i suoi dati essenziali.":
+              "Select a country on the map to open a geographic note and get your bearings among its essential data."
+          };
+          function translate(s) {
+            if (s == null) return null;
+            var t = s.trim();
+            if (!t) return null;
+            if (DICT.hasOwnProperty(t)) return s.replace(t, DICT[t]);
+            var m;
+            if ((m = t.match(/^(\d[\d.,]*)\s+risultati$/))) return s.replace(t, m[1] + " results");
+            if ((m = t.match(/^(\d[\d.,]*)\s+confini tracciati$/))) return s.replace(t, m[1] + " borders drawn");
+            return null;
+          }
+          function walk(node) {
+            if (!node) return;
+            if (node.nodeType === 3) {
+              var r = translate(node.nodeValue);
+              if (r != null && r !== node.nodeValue) node.nodeValue = r;
+            } else if (node.nodeType === 1) {
+              if (node.classList && node.classList.contains("wa-lang")) return;
+              var ch = node.childNodes;
+              for (var i = 0; i < ch.length; i++) walk(ch[i]);
+            }
+          }
+          var obs = new MutationObserver(function (muts) {
+            for (var i = 0; i < muts.length; i++) {
+              var mu = muts[i];
+              if (mu.type === "characterData") {
+                var r = translate(mu.target.nodeValue);
+                if (r != null && r !== mu.target.nodeValue) mu.target.nodeValue = r;
+              }
+              for (var j = 0; j < mu.addedNodes.length; j++) walk(mu.addedNodes[j]);
+            }
+          });
+          document.addEventListener("DOMContentLoaded", function () {
+            walk(document.body);
+            obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+          });
+        }
+
         // Interruttore lingua IT / EN
         function setLang(l) {
           try { localStorage.setItem("wa_lang", l); } catch (e) {}
