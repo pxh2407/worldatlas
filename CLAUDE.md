@@ -47,6 +47,12 @@ Le poche patch al bundle sono elencate nella sezione seguente.
     "Stime FMI · anno" (2025 salvo eccezioni in `YR`: Eritrea 2019, Siria 2010, Sri Lanka 2024, Palestina 2024).
   - I Paesi non coperti dal FMI (Cuba, Corea del Nord, micro-territori) mostrano solo il blocco demografico.
     Tutti i dati sono tabelle statiche incorporate in `index.html` (nessuna chiamata a internet in più).
+- **Bandiere vere** (`.wa-flag`): immagine SVG sopra il nome del Paese, iniettata leggendo `window.__waFlag`
+  (cca3 → cca2 minuscolo, costruita in `loadCountries`). File locali in `flags/<cca2>.svg` (249 bandiere da
+  flagcdn, ~4 MB) **committati nel repo** e inclusi anche nella versione offline → funzionano senza internet.
+  Scelta locale (non emoji) perché Windows non disegna le bandiere-emoji.
+- **Sfondo dossier bianco**: `aside.dossier { background:#fff }` e `aside.dossier::after { background-image:none }`
+  (rimossa la texture della mappa color crema).
 - **Leggibilità dossier**: testi ingranditi (etichette, valori, nota) via CSS.
 - **Mappa**: zoom fisso a 150%, vista che mostra tutto il nord tagliando solo il fondo dell'Antartide;
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;
