@@ -41,6 +41,8 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   stime ~2025, 197 Paesi) incorporata in `index.html`; iniettati nel dossier via `MutationObserver` leggendo il
   codice in `.dossier-code`. Funziona in IT ed EN; i Paesi senza dati (micro-territori, Cuba, Corea del Nord…)
   non mostrano il blocco. Il deficit mostra segno e parola ("−3,1% (deficit)", "+1,3% (avanzo)").
+  In fondo al blocco una riga riporta la fonte e l'anno ("Stime FMI · 2025"); l'anno è 2025 per quasi tutti,
+  con poche eccezioni nell'oggetto `YR` (Eritrea 2019, Siria 2010, Sri Lanka 2024, Palestina 2024).
 - **Leggibilità dossier**: testi ingranditi (etichette, valori, nota) via CSS.
 - **Mappa**: zoom fisso a 150%, vista che mostra tutto il nord tagliando solo il fondo dell'Antartide;
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;

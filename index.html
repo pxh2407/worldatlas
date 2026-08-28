@@ -213,9 +213,12 @@
           var loc = EN ? "en-US" : "it-IT";
           var T = EN
             ? { gdp: "GDP", pc: "GDP PER CAPITA", debt: "GOVERNMENT DEBT", def: "DEFICIT / GDP",
-                na: "n/a", ofg: " of GDP", defi: "deficit", surp: "surplus" }
+                na: "n/a", ofg: " of GDP", defi: "deficit", surp: "surplus", src: "IMF estimates" }
             : { gdp: "PIL", pc: "PIL PRO CAPITE", debt: "DEBITO PUBBLICO", def: "DEFICIT / PIL",
-                na: "n/d", ofg: " del PIL", defi: "deficit", surp: "avanzo" };
+                na: "n/d", ofg: " del PIL", defi: "deficit", surp: "avanzo", src: "Stime FMI" };
+          // Anno dei dati: 2025 per quasi tutti; poche eccezioni (ultimo anno FMI disponibile)
+          var YR = { ERI: 2019, LKA: 2024, SYR: 2010, PSE: 2024 };
+          function yearFor(code) { return YR[code] || 2025; }
           function nf(v, dec) { return new Intl.NumberFormat(loc, { maximumFractionDigits: dec }).format(v); }
           function money(bill) {
             if (bill == null) return T.na;
@@ -255,7 +258,7 @@
             block.setAttribute("data-code", code);
             block.innerHTML = rows.map(function (r) {
               return "<div><span>" + esc(r[0]) + "</span><strong>" + esc(r[1]) + "</strong></div>";
-            }).join("");
+            }).join("") + '<div class="wa-econ-yr">' + T.src + " · " + yearFor(code) + "</div>";
             facts.parentNode.insertBefore(block, facts.nextSibling);
           }
           function start() {
@@ -432,6 +435,7 @@
       aside.dossier .dossier-code { font-size: 11px !important; }
       /* Blocco economico (PIL, pro capite, debito, deficit): separatore sottile in alto */
       aside.dossier .wa-econ { border-top: 1px solid rgba(60,70,55,.16) !important; padding-top: 16px !important; margin-top: 2px !important; }
+      aside.dossier .wa-econ .wa-econ-yr { grid-column: 1 / -1 !important; font-size: .72rem !important; color: #6b7280 !important; letter-spacing: .05em !important; margin-top: 4px !important; }
 
       /* Mappa piu alta: con lo zoom fisso a 150% resta visibile l'Antartide */
       .map-frame { min-height: 620px !important; }
