@@ -307,6 +307,13 @@
             g.appendChild(tri);
             sel.parentNode.appendChild(g); // stesso gruppo dei Paesi: segue zoom e spostamenti
           }
+          // Al cambio di Paese porta la mappa in vista, inquadrandola tutta col Paese evidenziato
+          var lastSel = null;
+          function scrollToMap() {
+            var mf = document.querySelector(".map-frame");
+            if (!mf) { var sv = document.querySelector("svg"); mf = sv ? sv.parentElement : null; }
+            if (mf) { try { mf.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { mf.scrollIntoView(); } }
+          }
           function inject() {
             updateArrow();
             var aside = document.querySelector("aside.dossier") || document.querySelector(".dossier");
@@ -316,7 +323,8 @@
             var code = codeEl && codeEl.textContent.trim();
             var demoEx = aside.querySelector(".wa-demo"), econEx = aside.querySelector(".wa-econ");
             var flagEx = aside.querySelector(".wa-flag");
-            if (!facts || !code) { if (flagEx) flagEx.remove(); if (demoEx) demoEx.remove(); if (econEx) econEx.remove(); return; }
+            if (!facts || !code) { lastSel = null; if (flagEx) flagEx.remove(); if (demoEx) demoEx.remove(); if (econEx) econEx.remove(); return; }
+            if (code !== lastSel) { lastSel = code; scrollToMap(); }
             // Bandiera vera (immagine locale) sopra il nome del Paese
             var flagCode = window.__waFlag && window.__waFlag[code];
             var h2 = aside.querySelector("h2");
