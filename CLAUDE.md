@@ -53,6 +53,11 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   Scelta locale (non emoji) perché Windows non disegna le bandiere-emoji.
 - **Sfondo dossier bianco**: `aside.dossier { background:#fff }` e `aside.dossier::after { background-image:none }`
   (rimossa la texture della mappa color crema).
+- **Confini della mappa = linea bianca sottile**: `.country-shape { stroke:#fff; stroke-width:0.75px;
+  vector-effect:non-scaling-stroke }`. Il `non-scaling-stroke` è la chiave: prima il bordo era crema e lo
+  spessore **cresceva con lo zoom** (a 150%+ le coste frastagliate diventavano una fascia bianca spessa, e nei
+  Paesi piccoli il bordo copriva il colore lasciando solo un puntino). Ora è un'unica linea bianca uniforme a
+  ogni ingrandimento, coste e confini interni compresi.
 - **Leggibilità dossier**: testi ingranditi (etichette, valori, nota) via CSS.
 - **Mappa**: zoom fisso a 150%, vista che mostra tutto il nord tagliando solo il fondo dell'Antartide;
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;
