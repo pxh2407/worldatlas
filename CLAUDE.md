@@ -79,6 +79,8 @@ Se in futuro si sostituisce `assets/index-*.js` con una nuova build di Manus, ri
 8. **Didascalia zoom:** `ROTELLA PER ZOOM` → `PULSANTI + / - PER LO ZOOM`
 9. **Testi:** "Traccia una rotta." → "Esplora il mondo."; "Apri un Paese." → "Scopri ogni Paese.";
    "Trova il tuo punto di partenza." → "Scegli un Paese dall'elenco."
+10. **Elenco alfabetico:** nella `useMemo` della lista, dopo `...Vu(Rt)===u)})` e prima di `,[ct,c,u]`
+    aggiungere `.sort((a,b)=>Pl(a).localeCompare(Pl(b)))` (ordina solo l'elenco `st`, non la mappa).
 
 ## Aggiornare / pubblicare
 
