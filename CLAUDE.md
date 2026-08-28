@@ -41,7 +41,8 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   - **DEMOGRAFIA** (blocco `.wa-demo`): densità (calcolata al volo da popolazione/superficie, `window.__waDens`),
     aspettativa di vita (Banca Mondiale), ISU con categoria (ONU) — tabella `DEMO` (ISO3 → `[vita anni, ISU 0-1]`).
     Didascalia "Fonti: Banca Mondiale, ONU".
-  - **ECONOMIA** (blocco `.wa-econ`): PIL, PIL pro capite, crescita PIL, inflazione, debito pubblico, deficit/PIL —
+  - **ECONOMIA** (blocco `.wa-econ`): PIL, PIL pro capite, crescita PIL, inflazione, debito pubblico (% PIL),
+    debito totale (valore assoluto = PIL × debito%/100, in $), deficit/PIL —
     tabella `ECON` (ISO3 → `[PIL mld $, pro capite $, debito % PIL, saldo % PIL, crescita %, inflazione %]`, fonte
     **FMI/WEO** ~2025, 197 Paesi). Deficit con segno e parola ("−3,1% (deficit)", "+1,3% (avanzo)"); didascalia
     "Stime FMI · anno" (2025 salvo eccezioni in `YR`: Eritrea 2019, Siria 2010, Sri Lanka 2024, Palestina 2024).
@@ -89,6 +90,8 @@ Se in futuro si sostituisce `assets/index-*.js` con una nuova build di Manus, ri
    "Trova il tuo punto di partenza." → "Scegli un Paese dall'elenco."
 10. **Elenco alfabetico:** nella `useMemo` della lista, dopo `...Vu(Rt)===u)})` e prima di `,[ct,c,u]`
     aggiungere `.sort((a,b)=>Pl(a).localeCompare(Pl(b)))` (ordina solo l'elenco `st`, non la mappa).
+11. **Niente scroll al clic sulla lista:** nella `.country-row`, `onClick:()=>{w(I),window.scrollTo({top:260,behavior:"smooth"})}`
+    → `onClick:()=>{w(I)}` (selezionare un Paese dall'elenco non fa più saltare la pagina).
 
 ## Aggiornare / pubblicare
 

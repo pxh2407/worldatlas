@@ -221,13 +221,13 @@
           var loc = EN ? "en-US" : "it-IT";
           var T = EN
             ? { gdp: "GDP", pc: "GDP PER CAPITA", grow: "GDP GROWTH", infl: "INFLATION",
-                debt: "GOVERNMENT DEBT", def: "DEFICIT / GDP", dens: "DENSITY",
+                debt: "GOVERNMENT DEBT", debtabs: "TOTAL DEBT", def: "DEFICIT / GDP", dens: "DENSITY",
                 life: "LIFE EXPECTANCY", hdi: "HUMAN DEVELOPMENT (HDI)",
                 na: "n/a", ofg: " of GDP", defi: "deficit", surp: "surplus",
                 years: " years", dkm: "/km²", src: "IMF estimates", demsrc: "Sources: World Bank, UN",
                 vh: "very high", hi: "high", me: "medium", lo: "low" }
             : { gdp: "PIL", pc: "PIL PRO CAPITE", grow: "CRESCITA PIL", infl: "INFLAZIONE",
-                debt: "DEBITO PUBBLICO", def: "DEFICIT / PIL", dens: "DENSITÀ",
+                debt: "DEBITO PUBBLICO", debtabs: "DEBITO TOTALE", def: "DEFICIT / PIL", dens: "DENSITÀ",
                 life: "ASPETTATIVA DI VITA", hdi: "SVILUPPO UMANO (ISU)",
                 na: "n/d", ofg: " del PIL", defi: "deficit", surp: "avanzo",
                 years: " anni", dkm: " ab./km²", src: "Stime FMI", demsrc: "Fonti: Banca Mondiale, ONU",
@@ -257,7 +257,9 @@
           function econRows(code) {
             var e = ECON[code]; if (!e) return null;
             return [[T.gdp, money(e[0])], [T.pc, perCap(e[1])], [T.grow, signed(e[4])],
-                    [T.infl, plain(e[5])], [T.debt, ratio(e[2])], [T.def, balance(e[3])]];
+                    [T.infl, plain(e[5])], [T.debt, ratio(e[2])],
+                    [T.debtabs, (e[0] == null || e[2] == null) ? T.na : money(e[0] * e[2] / 100)],
+                    [T.def, balance(e[3])]];
           }
           function demoRows(code) {
             var dens = window.__waDens && window.__waDens[code];
@@ -531,7 +533,7 @@
       .intro-art { display: none !important; }
 
       /* Rimosso il riquadro decorativo "FIELD NOTE / ..." in fondo al dossier */
-      aside.dossier .dossier-image { display: none !important; }
+      .dossier-image { display: none !important; }
 
       /* Manina che punta piu piccola sulle nazioni (hotspot sulla punta del dito) */
       .country-shape {
