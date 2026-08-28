@@ -36,6 +36,11 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   DOM (`MutationObserver` + dizionario) traduce le scritte fisse dell'interfaccia.
 - **Continenti** completi (mappa `window.__waCont`) → il filtro per continente funziona per tutti i Paesi.
 - **Popolazione** mostrata nel dossier, formattata (es. "59 Mln", "1,4 Mld").
+- **Dati economici** nel dossier (PIL, PIL pro capite, debito pubblico, deficit/PIL) — tabella statica `ECON`
+  (codice ISO3 → `[PIL mld $, pro capite $, debito % PIL, saldo % PIL]`, fonte **FMI / World Economic Outlook**,
+  stime ~2025, 197 Paesi) incorporata in `index.html`; iniettati nel dossier via `MutationObserver` leggendo il
+  codice in `.dossier-code`. Funziona in IT ed EN; i Paesi senza dati (micro-territori, Cuba, Corea del Nord…)
+  non mostrano il blocco. Il deficit mostra segno e parola ("−3,1% (deficit)", "+1,3% (avanzo)").
 - **Leggibilità dossier**: testi ingranditi (etichette, valori, nota) via CSS.
 - **Mappa**: zoom fisso a 150%, vista che mostra tutto il nord tagliando solo il fondo dell'Antartide;
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;
