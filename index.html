@@ -275,7 +275,38 @@
             }).join("") + '<div class="wa-cap">' + esc(caption) + "</div>";
             return b;
           }
+          // Freccia che indica sulla mappa il Paese selezionato (utile per quelli minuscoli)
+          function updateArrow() {
+            var svg = document.querySelector(".map-frame svg") || document.querySelector("svg");
+            if (!svg) return;
+            var sel = svg.querySelector(".country-shape.is-selected");
+            var ex = svg.querySelector(".wa-arrow");
+            if (!sel) { if (ex) ex.parentNode.removeChild(ex); return; }
+            var d = sel.getAttribute("d") || "";
+            var key = d.length + ":" + d.slice(0, 24);
+            if (ex && ex.getAttribute("data-key") === key) return; // stesso Paese, non ricreare
+            if (ex) ex.parentNode.removeChild(ex);
+            var bb; try { bb = sel.getBBox(); } catch (e) { return; }
+            if (!bb || (!bb.width && !bb.height)) return;
+            var cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2;
+            var NS = "http://www.w3.org/2000/svg";
+            var g = document.createElementNS(NS, "g");
+            g.setAttribute("class", "wa-arrow");
+            g.setAttribute("data-key", key);
+            g.setAttribute("pointer-events", "none");
+            var w = 5, h = 12, gap = 2; // freccia (triangolo) che punta in giù verso il Paese
+            var tri = document.createElementNS(NS, "path");
+            tri.setAttribute("d", "M" + (cx - w) + " " + (cy - gap - h) + " L" + (cx + w) + " " + (cy - gap - h) + " L" + cx + " " + (cy - gap) + " Z");
+            tri.setAttribute("fill", "#c9352a");
+            tri.setAttribute("stroke", "#ffffff");
+            tri.setAttribute("stroke-width", "1.2");
+            tri.setAttribute("stroke-linejoin", "round");
+            tri.setAttribute("vector-effect", "non-scaling-stroke");
+            g.appendChild(tri);
+            sel.parentNode.appendChild(g); // stesso gruppo dei Paesi: segue zoom e spostamenti
+          }
           function inject() {
+            updateArrow();
             var aside = document.querySelector("aside.dossier") || document.querySelector(".dossier");
             if (!aside) return;
             var facts = aside.querySelector(".dossier-facts:not(.wa-demo):not(.wa-econ)");

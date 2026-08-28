@@ -58,6 +58,11 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   spessore **cresceva con lo zoom** (a 150%+ le coste frastagliate diventavano una fascia bianca spessa, e nei
   Paesi piccoli il bordo copriva il colore lasciando solo un puntino). Ora è un'unica linea bianca uniforme a
   ogni ingrandimento, coste e confini interni compresi.
+- **Freccia sul Paese selezionato** (`.wa-arrow`): quando selezioni un Paese, un piccolo triangolo rosso lo
+  indica sulla mappa — così anche i Paesi minuscoli (Kosovo, Vaticano, Singapore…), che come selezione sono solo
+  un puntino, si trovano subito. Iniettata in `updateArrow()` (nello script di `index.html`): trova il path
+  `.country-shape.is-selected`, ne calcola il centro con `getBBox()` e ci mette sopra la freccia, come figlia
+  dello stesso gruppo SVG dei Paesi (segue zoom e trascinamenti). NON tocca il bundle.
 - **Leggibilità dossier**: testi ingranditi (etichette, valori, nota) via CSS.
 - **Mappa**: zoom fisso a 150%, vista che mostra tutto il nord tagliando solo il fondo dell'Antartide;
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;
