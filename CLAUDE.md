@@ -36,13 +36,17 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   DOM (`MutationObserver` + dizionario) traduce le scritte fisse dell'interfaccia.
 - **Continenti** completi (mappa `window.__waCont`) → il filtro per continente funziona per tutti i Paesi.
 - **Popolazione** mostrata nel dossier, formattata (es. "59 Mln", "1,4 Mld").
-- **Dati economici** nel dossier (PIL, PIL pro capite, debito pubblico, deficit/PIL) — tabella statica `ECON`
-  (codice ISO3 → `[PIL mld $, pro capite $, debito % PIL, saldo % PIL]`, fonte **FMI / World Economic Outlook**,
-  stime ~2025, 197 Paesi) incorporata in `index.html`; iniettati nel dossier via `MutationObserver` leggendo il
-  codice in `.dossier-code`. Funziona in IT ed EN; i Paesi senza dati (micro-territori, Cuba, Corea del Nord…)
-  non mostrano il blocco. Il deficit mostra segno e parola ("−3,1% (deficit)", "+1,3% (avanzo)").
-  In fondo al blocco una riga riporta la fonte e l'anno ("Stime FMI · 2025"); l'anno è 2025 per quasi tutti,
-  con poche eccezioni nell'oggetto `YR` (Eritrea 2019, Siria 2010, Sri Lanka 2024, Palestina 2024).
+- **Due blocchi dati nel dossier** iniettati via `MutationObserver` (osserva `childList`+`characterData`, l'app
+  aggiorna il testo in-place) leggendo il codice in `.dossier-code`. Funzionano in IT ed EN; saltano ciò che manca.
+  - **DEMOGRAFIA** (blocco `.wa-demo`): densità (calcolata al volo da popolazione/superficie, `window.__waDens`),
+    aspettativa di vita (Banca Mondiale), ISU con categoria (ONU) — tabella `DEMO` (ISO3 → `[vita anni, ISU 0-1]`).
+    Didascalia "Fonti: Banca Mondiale, ONU".
+  - **ECONOMIA** (blocco `.wa-econ`): PIL, PIL pro capite, crescita PIL, inflazione, debito pubblico, deficit/PIL —
+    tabella `ECON` (ISO3 → `[PIL mld $, pro capite $, debito % PIL, saldo % PIL, crescita %, inflazione %]`, fonte
+    **FMI/WEO** ~2025, 197 Paesi). Deficit con segno e parola ("−3,1% (deficit)", "+1,3% (avanzo)"); didascalia
+    "Stime FMI · anno" (2025 salvo eccezioni in `YR`: Eritrea 2019, Siria 2010, Sri Lanka 2024, Palestina 2024).
+  - I Paesi non coperti dal FMI (Cuba, Corea del Nord, micro-territori) mostrano solo il blocco demografico.
+    Tutti i dati sono tabelle statiche incorporate in `index.html` (nessuna chiamata a internet in più).
 - **Leggibilità dossier**: testi ingranditi (etichette, valori, nota) via CSS.
 - **Mappa**: zoom fisso a 150%, vista che mostra tutto il nord tagliando solo il fondo dell'Antartide;
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;

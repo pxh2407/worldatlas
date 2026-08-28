@@ -105,8 +105,10 @@
         var POP = {"ABW":107995,"AFG":42647492,"AGO":37885849,"ALB":2377128,"AND":81938,"ARE":10986400,"ARG":45696159,"ARM":3033500,"ASM":46765,"ATG":93772,"AUS":27196812,"AUT":9177982,"AZE":10202830,"BDI":14047786,"BEL":11858610,"BEN":14462724,"BFA":23548781,"BGD":173562364,"BGR":6441421,"BHR":1588670,"BHS":401283,"BIH":3164253,"BLR":9132629,"BLZ":417072,"BMU":64636,"BOL":12413315,"BRA":211998573,"BRB":282467,"BRN":462721,"BTN":791524,"BWA":2521139,"CAF":5330690,"CAN":41288599,"CHE":9005582,"CHL":19764771,"CHN":1408975000,"CIV":31934230,"CMR":29123744,"COD":109276265,"COG":6332961,"COL":52886363,"COM":866628,"CPV":524877,"CRI":5129910,"CUB":10979783,"CUW":155967,"CYM":74457,"CYP":1358282,"CZE":10905028,"DEU":83516593,"DJI":1168722,"DMA":66205,"DNK":5976992,"DOM":11427557,"DZA":46814308,"ECU":18135478,"EGY":116538258,"ERI":3535603,"ESP":48848840,"EST":1372341,"ETH":132059767,"FIN":5619911,"FJI":928784,"FRA":68551653,"FRO":54681,"FSM":113160,"GAB":2538952,"GBR":69226000,"GEO":3699557,"GHA":34427414,"GIB":39329,"GIN":14754785,"GMB":2759988,"GNB":2201352,"GNQ":1892516,"GRC":10405134,"GRD":117207,"GRL":56836,"GTM":18406359,"GUM":167777,"GUY":831087,"HKG":7524100,"HND":10825703,"HRV":3866200,"HTI":11772557,"HUN":9562065,"IDN":283487931,"IMN":84160,"IND":1450935791,"IRL":5395790,"IRN":91567738,"IRQ":46042015,"ISL":386506,"ISR":9974400,"ITA":58952704,"JAM":2839175,"JOR":11552876,"JPN":123975371,"KAZ":20592571,"KEN":56432944,"KGZ":7221868,"KHM":17638801,"KIR":134518,"KNA":46843,"KOR":51751065,"KWT":4897263,"LAO":7769819,"LBN":5805962,"LBR":5612817,"LBY":7381023,"LCA":179744,"LIE":40450,"LKA":21916000,"LSO":2337423,"LTU":2888278,"LUX":677012,"LVA":1866124,"MAC":687000,"MAF":26129,"MAR":38081173,"MCO":38631,"MDA":2402306,"MDG":31964956,"MDV":527799,"MEX":130861007,"MHL":37548,"MKD":1824359,"MLI":24478595,"MLT":568847,"MMR":54500091,"MNE":623525,"MNG":3524788,"MNP":44278,"MOZ":34631766,"MRT":5169395,"MUS":1245779,"MWI":21655286,"MYS":35557673,"NAM":3030131,"NCL":292639,"NER":27032412,"NGA":232679478,"NIC":6916140,"NLD":17993485,"NOR":5572279,"NPL":29651054,"NRU":11947,"NZL":5287500,"OMN":5281538,"PAK":251269164,"PAN":4515577,"PER":34217848,"PHL":115843670,"PLW":17695,"PNG":10576502,"POL":36559233,"PRI":3203295,"PRK":26498823,"PRT":10694681,"PRY":6929153,"PSE":5289152,"PYF":281807,"QAT":2857822,"ROU":19051804,"RUS":143533851,"RWA":14256567,"SAU":35300280,"SDN":50448963,"SEN":18501984,"SGP":6036860,"SLB":819198,"SLE":8642022,"SLV":6338193,"SMR":33977,"SOM":19009151,"SRB":6586476,"SSD":11943408,"STP":235536,"SUR":634431,"SVK":5422069,"SVN":2127400,"SWE":10569709,"SWZ":1242822,"SXM":43350,"SYC":121354,"SYR":24672760,"TCA":46535,"TCD":20299123,"TGO":9515236,"THA":71668011,"TJK":10590927,"TKM":7494498,"TLS":1400638,"TON":104175,"TTO":1368333,"TUN":12277109,"TUR":85518661,"TUV":9646,"TZA":68560157,"UGA":50015092,"UKR":37860221,"URY":3386588,"USA":340110988,"UZB":36361859,"VCT":100616,"VEN":28405543,"VGB":39471,"VIR":104377,"VNM":100987686,"VUT":327777,"WSM":218019,"YEM":40583164,"ZAF":64007187,"ZMB":21314956,"ZWE":16634373,"UNK":1594353,"TWN":23400000,"VAT":800,"ESH":576000,"REU":873000,"GLP":384000,"MTQ":360000,"GUF":291000,"MYT":280000,"JEY":103000,"GGY":63000,"ALA":30000,"FLK":3800,"COK":15000,"NIU":1900,"SPM":6000,"BES":27000,"BLM":10000,"SHN":5300,"MSR":4400,"TKL":1900,"WLF":11000,"NFK":2100,"CXR":1700,"CCK":600,"PCN":40};
 
         // Dati economici per codice ISO3 (fonte: FMI / World Economic Outlook, stime ~2025):
-        // [PIL in miliardi $, PIL pro capite $, debito pubblico % del PIL, saldo bilancio % del PIL (negativo = deficit)].
-        var ECON = {"SDN":[39.7,788,187.6,-3.1],"AFG":[19.7,448,8,-0.9],"ALB":[30.3,11235,52.6,-1.7],"DZA":[285.7,6047,54.1,-10.2],"AND":[4.5,50379,30.3,3.5],"AGO":[141.7,3614,51.3,-4.1],"ATG":[2.3,21676,69.7,3.1],"ARG":[681.5,14355,80.3,-0.4],"ARM":[29.2,9521,49,-3.7],"ABW":[4.5,41462,63.6,1.9],"AUS":[1840,66352,51,-2.8],"AUT":[579.9,63161,80.5,-4.5],"AZE":[75.9,7322,20.1,2.6],"BHR":[47.5,29344,147.6,-13],"BGD":[457.9,2636,42,-2.9],"BRB":[8,27494,94.2,-0.3],"BLR":[92.8,10209,33.1,0.2],"BEL":[724.9,61002,106.3,-5.3],"BLZ":[3.3,7968,67.9,-1],"BEN":[24.4,1634,57.3,-2.9],"BTN":[3.5,4394,103.6,-2.7],"BOL":[64.3,5107,84.8,-11.6],"BIH":[33,9568,29.9,-2.4],"BWA":[19.5,7662,38.6,-7.4],"BRA":[2279.9,10686,93.3,-8.1],"BRN":[15.9,34678,1.5,-13.4],"BGR":[131,20921,27.1,-3],"BFA":[27.1,1126,52,-3.5],"BDI":[6.9,478,41.2,-3],"CPV":[3.1,5995,101,1.1],"KHM":[49.3,2762,26.5,-1],"CMR":[59.3,1984,40.4,-2],"CAN":[2319.9,55765,113.5,-1.8],"CAF":[3.2,579,61.8,-5.5],"TCD":[22.1,1165,30.4,-1.3],"CHL":[355.3,17735,41.8,-2.8],"CHN":[19626.2,13968,99.2,-7.9],"COL":[457.4,8623,59.9,-5.7],"COM":[1.6,1769,29.5,-2.3],"COD":[92.8,871,20.2,-2.8],"CRI":[102.9,19162,60.4,-3.4],"CIV":[98.9,3006,56.3,-3],"HRV":[106.1,27376,55.9,-2.9],"CYP":[41,41730,55.3,3],"CZE":[389,35678,44.6,-2],"TLS":[2.1,1464,14.3,-48],"DNK":[461.7,77046,27.5,2.9],"DJI":[4.4,4145,32.1,-0.7],"DMA":[0.7,9895,102.6,-1.3],"DOM":[127.9,11749,59,-3.6],"ECU":[130.3,7199,54.4,-2.9],"EGY":[364.6,3379,86.8,-6.6],"SLV":[37.3,5839,87.2,-2.8],"GNQ":[12.5,7628,40.6,-2.5],"ERI":[2,567,260.4,2.7],"EST":[47,34325,24.2,-1.3],"SWZ":[5.2,4442,44.9,-6.1],"ETH":[109.1,987,43.1,-1.2],"FJI":[6,6508,78.7,-2.5],"FIN":[316.9,56464,89.3,-3.9],"FRA":[3368.9,48930,116,-5.1],"GAB":[21.6,9376,78.9,-8.5],"GEO":[38.2,10346,34.3,-1.5],"DEU":[5048.1,60439,62.9,-2.7],"GHA":[114.7,3271,48.8,-1.3],"GRC":[280.5,27041,145.7,1.3],"GRD":[1.4,12210,71.6,-5],"GTM":[121.1,6489,27.2,-1.9],"GIN":[27.2,1722,48.1,-7],"GNB":[2.6,1311,75.3,-6.7],"GUY":[27.1,26994,28.6,-5.4],"HTI":[32.1,2557,12.3,-0.2],"HND":[39.7,3607,41.2,-0.7],"HKG":[427.3,56893,11.9,-4.8],"HUN":[246.9,25826,75.2,-4.7],"ISL":[38.6,99071,56.1,-2.8],"IND":[3916.3,2675,84.1,-7.4],"IDN":[1445.6,5082,41,-2.9],"IRN":[371.2,4264,37.3,-5.7],"IRQ":[264.2,5803,53.9,-6.4],"IRL":[718.1,130652,32.9,1.5],"ISR":[610.8,60335,68.5,-5.2],"ITA":[2550.1,43270,137.1,-3.1],"JAM":[22.3,8106,67.7,-3.8],"JPN":[4435.2,35973,206.5,-1.1],"JOR":[61.7,5355,82.8,-6.3],"KAZ":[302.7,14855,24.6,-3.1],"KEN":[136.5,2558,69.3,-6.4],"KIR":[0.3,2701,8,-14.5],"KOR":[1872.4,36227,52.3,-1.4],"UNK":[12.4,7902,17.5,-0.8],"KWT":[157.8,30877,14.6,28.4],"KGZ":[21.6,2984,36,-0.1],"LAO":[17.8,2288,80.6,1.6],"LVA":[48.6,26116,46.9,-4],"LBN":[34.5,6443,139.4,3.3],"LSO":[2.9,1206,49.1,2.2],"LBR":[5.2,910,54.9,-1.4],"LBY":[44.7,5999,null,-31.1],"LTU":[94.9,32839,39.8,-2.2],"LUX":[101.1,148247,27,-1],"MAC":[52.1,74465,0,4.5],"MDG":[19.6,622,48.7,-2.2],"MWI":[15,625,78.4,-11.5],"MYS":[472.2,13949,70.7,-3.5],"MDV":[7.7,18658,125.4,-2.9],"MLI":[30.1,1190,41.9,-1.6],"MLT":[27.8,49297,46.8,-3.1],"MHL":[0.3,8451,11.8,1.4],"MRT":[12.3,2655,40.1,-0.3],"MUS":[16.1,12977,86.5,-3.7],"MEX":[1832.6,13741,61.8,-4.9],"FSM":[0.5,5308,8.9,0.4],"MDA":[20.3,8542,36.6,-3.9],"MNG":[25.4,7079,45.1,1.7],"MNE":[9.2,14784,67.1,-3.6],"MAR":[182.6,4842,67.1,-3.5],"MOZ":[22.3,623,102.5,-4],"MMR":[82.4,1502,51.9,-4.9],"NAM":[14.8,4862,70.2,-6.5],"NRU":[0.2,14584,14.6,3.5],"NPL":[44.8,1512,48.1,-1.9],"NLD":[1332.2,73833,43.3,-1.8],"NZL":[258.8,48621,54.7,-3.9],"NIC":[22.2,3337,34.8,2.1],"NER":[21.8,750,45.4,-3.3],"NGA":[290.5,1223,35.5,-1.8],"MKD":[19.1,10546,52.5,-4],"NOR":[530.8,94468,45,9.3],"OMN":[106.1,19996,35.8,1],"PAK":[407.8,1696,72.8,-5.4],"PLW":[0.3,19685,62.3,1.7],"PAN":[90.5,19814,56.6,-3.7],"PNG":[32.5,2538,52.1,-2.4],"PRY":[49.4,7692,38.1,-1.7],"PER":[341,9911,30.2,-2.4],"PHL":[487.2,4270,59.4,-4],"POL":[1035.6,28374,58.8,-7],"PRT":[346.4,32166,89.9,0.3],"PRI":[126.5,39847,18,-0.4],"QAT":[221.2,69680,41.4,-1],"COG":[15.6,2404,96.8,0.3],"ROU":[427.9,22725,60.6,-7.6],"RUS":[2587.9,17972,17.2,-3.9],"RWA":[16,1128,64.6,-4.5],"WSM":[1.3,6075,21.2,4.7],"SMR":[2.3,65543,60.6,-1],"STP":[1,4085,55.7,-2.5],"SAU":[1276.9,35464,31.7,-5.8],"SEN":[37.1,1936,130.2,-7.9],"SRB":[100,15284,42.4,-2.2],"SYC":[2.3,18479,51.5,-1],"SLE":[7.7,874,45.2,-4.2],"SGP":[603.9,99365,171.3,4.2],"SVK":[154.4,28498,61.6,-5],"SVN":[79.6,37357,65.9,-2.4],"SLB":[1.7,2135,28.7,-3.2],"SOM":[13,764,null,-0.3],"ZAF":[427.1,6769,78.6,-5.8],"SSD":[5.7,470,62.1,3.5],"ESP":[1903.8,38290,100.4,-2.5],"LKA":[99,4516,100.8,-5.4],"KNA":[1.1,21002,58.4,-11.7],"LCA":[2.7,14603,77.1,-2.9],"VCT":[1.2,10573,113.4,-12.3],"SUR":[4.7,7099,105.8,-9.6],"SWE":[669,62662,34.9,-1.4],"CHE":[1043.5,115620,39.4,0.5],"SYR":[60,2807,30,-7.8],"TWN":[920.1,39489,22.4,-2.1],"TJK":[17.5,1693,21.6,-1.8],"TZA":[87.3,1292,49.7,-3],"THA":[577,8057,64.7,-1.9],"BHS":[16.5,40005,73.8,-0.5],"GMB":[2.6,904,73.9,-2.9],"TGO":[11.9,1217,63,-3.2],"TON":[0.7,6858,27.4,4.9],"TTO":[25.9,18072,84.2,-5.5],"TUN":[57.6,4664,81.3,-5.2],"TUR":[1597.3,18611,23.5,-2.8],"TKM":[77.4,11587,3.8,0.1],"TUV":[0.1,5823,3.6,31.6],"UGA":[66,1375,54.2,-7.1],"UKR":[212.9,6499,108.7,-23.3],"ARE":[571.6,50232,34.3,5.2],"GBR":[4003,57608,102.3,-5.4],"USA":[30767.1,89991,123.9,-6.8],"URY":[85.6,24549,65.7,-3.4],"UZB":[147.1,3846,28.6,-1.7],"VUT":[1.3,3936,40.9,-3.9],"VEN":[99.7,3736,308.7,-5.8],"VNM":[494,4829,30.3,-2.2],"PSE":[16,2853,56.1,-3],"YEM":[7.9,420,null,-3.5],"ZMB":[28.9,1318,86,-3.8],"ZWE":[53.5,3080,43.8,0.1],"LIE":[9,217928,0.5,2.8]};
+        // [PIL mld $, PIL pro capite $, debito % PIL, saldo % PIL (neg.=deficit), crescita PIL % annua, inflazione % annua].
+        var ECON = {"SDN":[39.7,788,187.6,-3.1,3.2,100.2],"AFG":[19.7,448,8,-0.9,3,2.9],"ALB":[30.3,11235,52.6,-1.7,3.7,2.2],"DZA":[285.7,6047,54.1,-10.2,3.8,1.4],"AND":[4.5,50379,30.3,3.5,3.9,2.4],"AGO":[141.7,3614,51.3,-4.1,3.1,20.2],"ATG":[2.3,21676,69.7,3.1,3,1.4],"ARG":[681.5,14355,80.3,-0.4,4.4,41.9],"ARM":[29.2,9521,49,-3.7,7.2,3.3],"ABW":[4.5,41462,63.6,1.9,5.6,0.1],"AUS":[1840,66352,51,-2.8,2,2.9],"AUT":[579.9,63161,80.5,-4.5,0.6,3.6],"AZE":[75.9,7322,20.1,2.6,1.4,5.6],"BHR":[47.5,29344,147.6,-13,3.1,-0.1],"BGD":[457.9,2636,42,-2.9,3.5,10],"BRB":[8,27494,94.2,-0.3,2.7,0.8],"BLR":[92.8,10209,33.1,0.2,1.3,6.6],"BEL":[724.9,61002,106.3,-5.3,1,3],"BLZ":[3.3,7968,67.9,-1,2.7,1.1],"BEN":[24.4,1634,57.3,-2.9,7.5,1.1],"BTN":[3.5,4394,103.6,-2.7,7.1,2.6],"BOL":[64.3,5107,84.8,-11.6,-1.2,19.5],"BIH":[33,9568,29.9,-2.4,2,4],"BWA":[19.5,7662,38.6,-7.4,-0.9,2.8],"BRA":[2279.9,10686,93.3,-8.1,2.3,5],"BRN":[15.9,34678,1.5,-13.4,0.6,-0.3],"BGR":[131,20921,27.1,-3,3.1,3.5],"BFA":[27.1,1126,52,-3.5,5,-0.5],"BDI":[6.9,478,41.2,-3,3.9,34.2],"CPV":[3.1,5995,101,1.1,5.5,2.3],"KHM":[49.3,2762,26.5,-1,5,2.5],"CMR":[59.3,1984,40.4,-2,3.1,3.4],"CAN":[2319.9,55765,113.5,-1.8,1.7,2.1],"CAF":[3.2,579,61.8,-5.5,4.8,1],"TCD":[22.1,1165,30.4,-1.3,5.6,-2.6],"CHL":[355.3,17735,41.8,-2.8,2.3,4.2],"CHN":[19626.2,13968,99.2,-7.9,5,0],"COL":[457.4,8623,59.9,-5.7,2.6,5.1],"COM":[1.6,1769,29.5,-2.3,3.8,3.2],"COD":[92.8,871,20.2,-2.8,5.7,7.4],"CRI":[102.9,19162,60.4,-3.4,4.6,-0.1],"CIV":[98.9,3006,56.3,-3,6.5,0.1],"HRV":[106.1,27376,55.9,-2.9,3.2,4.4],"CYP":[41,41730,55.3,3,3.8,0.8],"CZE":[389,35678,44.6,-2,2.5,2.5],"TLS":[2.1,1464,14.3,-48,4.5,0.5],"DNK":[461.7,77046,27.5,2.9,2.9,1.8],"DJI":[4.4,4145,32.1,-0.7,6,-0.3],"DMA":[0.7,9895,102.6,-1.3,4.5,2.3],"DOM":[127.9,11749,59,-3.6,2.1,3.9],"ECU":[130.3,7199,54.4,-2.9,3.7,0.7],"EGY":[364.6,3379,86.8,-6.6,4.4,20.4],"SLV":[37.3,5839,87.2,-2.8,3.7,0.3],"GNQ":[12.5,7628,40.6,-2.5,-6.4,2.8],"ERI":[2,567,260.4,2.7,3.8,1.3],"EST":[47,34325,24.2,-1.3,0.6,4.8],"SWZ":[5.2,4442,44.9,-6.1,3.6,3.1],"ETH":[109.1,987,43.1,-1.2,9.2,13.2],"FJI":[6,6508,78.7,-2.5,3.2,-1.4],"FIN":[316.9,56464,89.3,-3.9,0.2,1.8],"FRA":[3368.9,48930,116,-5.1,0.9,0.9],"GAB":[21.6,9376,78.9,-8.5,2.5,2],"GEO":[38.2,10346,34.3,-1.5,7.5,3.9],"DEU":[5048.1,60439,62.9,-2.7,0.2,2.3],"GHA":[114.7,3271,48.8,-1.3,6,14.2],"GRC":[280.5,27041,145.7,1.3,2.1,2.9],"GRD":[1.4,12210,71.6,-5,4.4,0.6],"GTM":[121.1,6489,27.2,-1.9,4.1,1.6],"GIN":[27.2,1722,48.1,-7,6.7,3.1],"GNB":[2.6,1311,75.3,-6.7,5.5,0.9],"GUY":[27.1,26994,28.6,-5.4,19.3,3.3],"HTI":[32.1,2557,12.3,-0.2,-2.7,28.3],"HND":[39.7,3607,41.2,-0.7,3.7,4.6],"HKG":[427.3,56893,11.9,-4.8,3.5,1.4],"HUN":[246.9,25826,75.2,-4.7,0.4,4.4],"ISL":[38.6,99071,56.1,-2.8,1.3,4.1],"IND":[3916.3,2675,84.1,-7.4,7.6,2.1],"IDN":[1445.6,5082,41,-2.9,5.1,1.9],"IRN":[371.2,4264,37.3,-5.7,-1.5,50.9],"IRQ":[264.2,5803,53.9,-6.4,-0.4,0.3],"IRL":[718.1,130652,32.9,1.5,12.3,2.1],"ISR":[610.8,60335,68.5,-5.2,2.9,3],"ITA":[2550.1,43270,137.1,-3.1,0.5,1.6],"JAM":[22.3,8106,67.7,-3.8,-0.1,3.9],"JPN":[4435.2,35973,206.5,-1.1,1.2,3.2],"JOR":[61.7,5355,82.8,-6.3,2.7,1.8],"KAZ":[302.7,14855,24.6,-3.1,6.5,11.4],"KEN":[136.5,2558,69.3,-6.4,4.9,4.1],"KIR":[0.3,2701,8,-14.5,4.3,6.5],"KOR":[1872.4,36227,52.3,-1.4,1,2.1],"UNK":[12.4,7902,17.5,-0.8,3.6,3.9],"KWT":[157.8,30877,14.6,28.4,3.5,2.4],"KGZ":[21.6,2984,36,-0.1,11.1,8.2],"LAO":[17.8,2288,80.6,1.6,4.8,7.7],"LVA":[48.6,26116,46.9,-4,2.1,3.8],"LBN":[34.5,6443,139.4,3.3,4,14.6],"LSO":[2.9,1206,49.1,2.2,1.4,4.4],"LBR":[5.2,910,54.9,-1.4,5.1,8.3],"LBY":[44.7,5999,null,-31.1,15.9,1.8],"LTU":[94.9,32839,39.8,-2.2,2.9,3.4],"LUX":[101.1,148247,27,-1,0.6,2.5],"MAC":[52.1,74465,0,4.5,4.7,0.3],"MDG":[19.6,622,48.7,-2.2,2.8,8],"MWI":[15,625,78.4,-11.5,2.1,28.4],"MYS":[472.2,13949,70.7,-3.5,5.2,1.4],"MDV":[7.7,18658,125.4,-2.9,5,3.5],"MLI":[30.1,1190,41.9,-1.6,4.9,2.3],"MLT":[27.8,49297,46.8,-3.1,4,2.4],"MHL":[0.3,8451,11.8,1.4,2.5,5.5],"MRT":[12.3,2655,40.1,-0.3,4.2,1.6],"MUS":[16.1,12977,86.5,-3.7,3.1,3.7],"MEX":[1832.6,13741,61.8,-4.9,0.6,3.8],"FSM":[0.5,5308,8.9,0.4,1.1,3.2],"MDA":[20.3,8542,36.6,-3.9,2.4,7.8],"MNG":[25.4,7079,45.1,1.7,6.8,8.6],"MNE":[9.2,14784,67.1,-3.6,2.7,3.9],"MAR":[182.6,4842,67.1,-3.5,4.9,0.8],"MOZ":[22.3,623,102.5,-4,-0.5,4.4],"MMR":[82.4,1502,51.9,-4.9,-2,22],"NAM":[14.8,4862,70.2,-6.5,2.4,3.5],"NRU":[0.2,14584,14.6,3.5,2.2,6.1],"NPL":[44.8,1512,48.1,-1.9,4.6,4.1],"NLD":[1332.2,73833,43.3,-1.8,1.9,3],"NZL":[258.8,48621,54.7,-3.9,0.2,2.8],"NIC":[22.2,3337,34.8,2.1,4.9,2.1],"NER":[21.8,750,45.4,-3.3,6.9,-4.6],"NGA":[290.5,1223,35.5,-1.8,4,23],"MKD":[19.1,10546,52.5,-4,3.5,4.1],"NOR":[530.8,94468,45,9.3,1.1,3],"OMN":[106.1,19996,35.8,1,2.4,1],"PAK":[407.8,1696,72.8,-5.4,3.1,4.5],"PLW":[0.3,19685,62.3,1.7,6.3,0.3],"PAN":[90.5,19814,56.6,-3.7,4.4,0],"PNG":[32.5,2538,52.1,-2.4,5.6,4.4],"PRY":[49.4,7692,38.1,-1.7,6,4.1],"PER":[341,9911,30.2,-2.4,3.4,1.5],"PHL":[487.2,4270,59.4,-4,4.4,1.7],"POL":[1035.6,28374,58.8,-7,3.6,3.6],"PRT":[346.4,32166,89.9,0.3,1.9,2.2],"PRI":[126.5,39847,18,-0.4,-0.8,1.4],"QAT":[221.2,69680,41.4,-1,2.8,0.6],"COG":[15.6,2404,96.8,0.3,2.4,2.6],"ROU":[427.9,22725,60.6,-7.6,0.7,7.3],"RUS":[2587.9,17972,17.2,-3.9,1,8.7],"RWA":[16,1128,64.6,-4.5,7,7],"WSM":[1.3,6075,21.2,4.7,4.2,1.9],"SMR":[2.3,65543,60.6,-1,1.5,2.3],"STP":[1,4085,55.7,-2.5,2.1,0.9],"SAU":[1276.9,35464,31.7,-5.8,4.5,2],"SEN":[37.1,1936,130.2,-7.9,7.9,1.4],"SRB":[100,15284,42.4,-2.2,2,3.9],"SYC":[2.3,18479,51.5,-1,5.1,0.3],"SLE":[7.7,874,45.2,-4.2,4.4,7.6],"SGP":[603.9,99365,171.3,4.2,5,0.9],"SVK":[154.4,28498,61.6,-5,0.8,4.2],"SVN":[79.6,37357,65.9,-2.4,1.1,2.5],"SLB":[1.7,2135,28.7,-3.2,2.7,3.4],"SOM":[13,764,null,-0.3,3,3.7],"ZAF":[427.1,6769,78.6,-5.8,1.1,3.2],"SSD":[5.7,470,62.1,3.5,46.1,97.6],"ESP":[1903.8,38290,100.4,-2.5,2.8,2.7],"LKA":[99,4516,100.8,-5.4,5,1.2],"KNA":[1.1,21002,58.4,-11.7,1.5,1.3],"LCA":[2.7,14603,77.1,-2.9,1.7,2],"VCT":[1.2,10573,113.4,-12.3,3.4,0.9],"SUR":[4.7,7099,105.8,-9.6,1.5,9.2],"SWE":[669,62662,34.9,-1.4,1.5,2.6],"CHE":[1043.5,115620,39.4,0.5,1.3,0.2],"SYR":[60,2807,30,-7.8,3.4,4.4],"TWN":[920.1,39489,22.4,-2.1,8.7,1.7],"TJK":[17.5,1693,21.6,-1.8,8.4,3.4],"TZA":[87.3,1292,49.7,-3,5.9,3.3],"THA":[577,8057,64.7,-1.9,2.4,-0.1],"BHS":[16.5,40005,73.8,-0.5,2.8,0.6],"GMB":[2.6,904,73.9,-2.9,6,7.9],"TGO":[11.9,1217,63,-3.2,5.9,0.4],"TON":[0.7,6858,27.4,4.9,2.8,3.2],"TTO":[25.9,18072,84.2,-5.5,0.8,1],"TUN":[57.6,4664,81.3,-5.2,2.5,5.3],"TUR":[1597.3,18611,23.5,-2.8,3.6,34.9],"TKM":[77.4,11587,3.8,0.1,3.6,2.7],"TUV":[0.1,5823,3.6,31.6,2.2,2],"UGA":[66,1375,54.2,-7.1,6.7,3.6],"UKR":[212.9,6499,108.7,-23.3,1.8,12.7],"ARE":[571.6,50232,34.3,5.2,5.8,1.3],"GBR":[4003,57608,102.3,-5.4,1.3,3.4],"USA":[30767.1,89991,123.9,-6.8,2.1,2.7],"URY":[85.6,24549,65.7,-3.4,1.8,4.7],"UZB":[147.1,3846,28.6,-1.7,7.7,8.8],"VUT":[1.3,3936,40.9,-3.9,3.1,1.7],"VEN":[99.7,3736,308.7,-5.8,1.5,252],"VNM":[494,4829,30.3,-2.2,8,3.3],"PSE":[16,2853,56.1,-3,-22.9,10.5],"YEM":[7.9,420,null,-3.5,-0.5,21.4],"ZMB":[28.9,1318,86,-3.8,3.8,13.9],"ZWE":[53.5,3080,43.8,0.1,7.5,81.4],"LIE":[9,217928,0.5,2.8,0,0.2]};
+        // Dati demografici/sviluppo per codice ISO3: [aspettativa di vita anni (Banca Mondiale), ISU 0-1 (ONU)].
+        var DEMO = {"ABW":[76.5,null],"AFG":[66.3,0.496],"AGO":[64.8,0.616],"ALB":[79.8,0.81],"AND":[84.2,0.913],"ARE":[83.1,0.94],"ARG":[77.5,0.865],"ARM":[78.3,0.811],"ASM":[73,null],"ATG":[77.8,0.851],"AUS":[83.1,0.958],"AUT":[82,0.93],"AZE":[74.6,0.789],"BDI":[63.8,0.439],"BEL":[82.3,0.951],"BEN":[61,0.515],"BFA":[61.3,0.459],"BGD":[74.9,0.685],"BGR":[75.8,0.845],"BHR":[81.4,0.899],"BHS":[74.7,0.82],"BIH":[78,0.804],"BLR":[74.4,0.824],"BLZ":[73.7,0.721],"BMU":[82.5,null],"BOL":[68.7,0.733],"BRA":[76,0.786],"BRB":[76.3,0.811],"BRN":[75.5,0.837],"BTN":[73.3,0.698],"BWA":[69.3,0.731],"CAF":[57.7,0.414],"CAN":[82.1,0.939],"CHE":[84.4,0.97],"CHL":[81.4,0.878],"CHN":[78,0.797],"CIV":[62.1,0.582],"CMR":[64,0.588],"COD":[62.1,0.522],"COG":[66,0.649],"COL":[77.9,0.788],"COM":[67,0.603],"CPV":[76.2,0.668],"CRI":[81,0.833],"CUB":[78.3,0.762],"CUW":[77,null],"CYM":[80.5,null],"CYP":[81.8,0.913],"CZE":[80,0.915],"DEU":[80.8,0.959],"DJI":[66.2,0.513],"DMA":[71.3,0.761],"DNK":[82.3,0.962],"DOM":[73.9,0.776],"DZA":[76.5,0.763],"ECU":[77.6,0.777],"EGY":[71.8,0.754],"ERI":[68.9,0.503],"ESP":[83.9,0.918],"EST":[79.3,0.905],"ETH":[67.6,0.497],"FIN":[82.3,0.948],"FJI":[67.5,0.731],"FRA":[83,0.92],"FRO":[83.1,null],"FSM":[67.4,0.615],"GAB":[68.5,0.733],"GBR":[81.4,0.946],"GEO":[74.7,0.844],"GHA":[65.7,0.628],"GIB":[83.6,null],"GIN":[60.9,0.5],"GMB":[66.1,0.524],"GNB":[64.3,0.514],"GNQ":[63.9,0.674],"GRC":[81.8,0.908],"GRD":[75.4,0.791],"GRL":[70.3,null],"GTM":[72.7,0.662],"GUM":[77.4,null],"GUY":[70.3,0.776],"HKG":[85.4,0.955],"HND":[73,0.645],"HRV":[78.9,0.889],"HTI":[65.1,0.554],"HUN":[76.7,0.87],"IDN":[71.3,0.728],"IMN":[81.1,null],"IND":[72.2,0.685],"IRL":[83,0.949],"IRN":[77.9,0.799],"IRQ":[72.4,0.695],"ISL":[82.8,0.972],"ISR":[83.2,0.919],"ITA":[84,0.915],"JAM":[71.6,0.72],"JOR":[78,0.754],"JPN":[84,0.925],"KAZ":[74.5,0.837],"KEN":[63.8,0.628],"KGZ":[72.4,0.72],"KHM":[70.8,0.606],"KIR":[66.6,0.644],"KNA":[72.3,0.84],"KOR":[83.6,0.937],"KWT":[84.6,0.852],"LAO":[69.2,0.617],"LBN":[77.9,0.752],"LBR":[62.3,0.51],"LBY":[71.1,0.721],"LCA":[72.8,0.748],"LIE":[84.2,0.938],"LKA":[77.7,0.776],"LSO":[57.8,0.55],"LTU":[77.2,0.895],"LUX":[83.2,0.922],"LVA":[76.4,0.889],"MAC":[83.3,null],"MAF":[80.4,null],"MAR":[75.5,0.71],"MCO":[86.5,null],"MDA":[71.3,0.785],"MDG":[63.8,0.487],"MDV":[81.3,0.766],"MEX":[75.3,0.789],"MHL":[67.1,0.733],"MKD":[76.6,0.815],"MLI":[60.7,0.419],"MLT":[83,0.924],"MMR":[67.1,0.609],"MNE":[77.9,0.862],"MNG":[72.4,0.747],"MNP":[78.9,null],"MOZ":[63.8,0.493],"MRT":[68.7,0.563],"MUS":[73.8,0.806],"MWI":[67.6,0.517],"MYS":[76.8,0.819],"NAM":[67.5,0.665],"NCL":[78.9,null],"NER":[61.4,0.419],"NGA":[54.6,0.56],"NIC":[75.1,0.706],"NLD":[82,0.955],"NOR":[83.2,0.97],"NPL":[70.6,0.622],"NRU":[62.3,0.703],"NZL":[82,0.938],"OMN":[80.2,0.858],"PAK":[67.8,0.544],"PAN":[79.8,0.839],"PER":[77.9,0.794],"PHL":[69.9,0.72],"PLW":[69.4,0.786],"PNG":[66.3,0.576],"POL":[78.4,0.906],"PRI":[81.9,null],"PRK":[73.7,null],"PRT":[82.4,0.89],"PRY":[74,0.756],"PSE":[69.2,0.674],"PYF":[84.2,null],"QAT":[82.5,0.886],"ROU":[76.5,0.845],"RUS":[73.4,0.832],"RWA":[68,0.578],"SAU":[79,0.9],"SDN":[66.5,0.511],"SEN":[68.9,0.53],"SGP":[83.3,0.946],"SLB":[70.7,0.584],"SLE":[62,0.467],"SLV":[72.3,0.678],"SMR":[85.8,0.915],"SOM":[59,0.404],"SRB":[76,0.833],"SSD":[57.7,0.388],"STP":[69.9,0.637],"SUR":[73.8,0.722],"SVK":[78.4,0.88],"SVN":[82.3,0.931],"SWE":[84.1,0.959],"SWZ":[64.3,0.695],"SXM":[76.5,null],"SYC":[76.3,0.848],"SYR":[72.6,0.564],"TCA":[78.2,null],"TCD":[55.2,0.416],"TGO":[62.9,0.571],"THA":[76.6,0.798],"TJK":[71.9,0.691],"TKM":[70.2,0.764],"TLS":[67.9,0.634],"TON":[73.1,0.769],"TTO":[73.6,0.807],"TUN":[76.7,0.746],"TUR":[77.4,0.853],"TUV":[67.3,0.689],"TZA":[67.2,0.555],"UGA":[68.5,0.582],"UKR":[74.7,0.779],"URY":[78.3,0.862],"USA":[78.9,0.938],"UZB":[72.5,0.74],"VCT":[71.4,0.798],"VEN":[72.7,0.709],"VGB":[77.4,null],"VIR":[80.8,null],"VNM":[74.7,0.766],"VUT":[71.7,0.621],"WSM":[71.8,0.708],"YEM":[69.4,0.47],"ZAF":[66.3,0.741],"ZMB":[66.5,0.595],"ZWE":[63.1,0.598],"UNK":[78.2,null],"TWN":[80.2,0.926]};
 
         function loadCountries() {
           if (!countriesPromise) {
@@ -117,6 +119,8 @@
                 if (!c) continue;
                 // Inietta la popolazione (assente nel dataset) — usata in IT ed EN
                 if (c.cca3 && POP[c.cca3] && !c.population) c.population = POP[c.cca3];
+                // Densità (ab./km²) calcolata al volo da popolazione e superficie
+                if (c.cca3 && c.area > 0 && c.population) (window.__waDens = window.__waDens || {})[c.cca3] = c.population / c.area;
                 var it = c.translations && c.translations.ita && c.translations.ita.common;
                 if (it) it = cap(it);
                 var en = c.name && c.name.common;
@@ -205,65 +209,93 @@
           };
         }
 
-        // ===== Dati economici nel dossier (PIL, pro capite, debito, deficit) =====
-        // Inietta 4 valori (tabella ECON) sotto le informazioni principali, leggendo
-        // il codice ISO3 in .dossier-code. Funziona sia in italiano sia in inglese.
+        // ===== Dati extra nel dossier: economia + demografia/sviluppo =====
+        // Inietta due blocchi sotto le informazioni principali, leggendo il codice
+        // ISO3 in .dossier-code: DEMOGRAFIA (densità, aspettativa di vita, ISU) ed
+        // ECONOMIA (PIL, pro capite, crescita, inflazione, debito, deficit).
+        // Funziona sia in italiano sia in inglese; salta ciò che manca.
         (function () {
           var EN = LANG === "en";
           var loc = EN ? "en-US" : "it-IT";
           var T = EN
-            ? { gdp: "GDP", pc: "GDP PER CAPITA", debt: "GOVERNMENT DEBT", def: "DEFICIT / GDP",
-                na: "n/a", ofg: " of GDP", defi: "deficit", surp: "surplus", src: "IMF estimates" }
-            : { gdp: "PIL", pc: "PIL PRO CAPITE", debt: "DEBITO PUBBLICO", def: "DEFICIT / PIL",
-                na: "n/d", ofg: " del PIL", defi: "deficit", surp: "avanzo", src: "Stime FMI" };
-          // Anno dei dati: 2025 per quasi tutti; poche eccezioni (ultimo anno FMI disponibile)
+            ? { gdp: "GDP", pc: "GDP PER CAPITA", grow: "GDP GROWTH", infl: "INFLATION",
+                debt: "GOVERNMENT DEBT", def: "DEFICIT / GDP", dens: "DENSITY",
+                life: "LIFE EXPECTANCY", hdi: "HUMAN DEVELOPMENT (HDI)",
+                na: "n/a", ofg: " of GDP", defi: "deficit", surp: "surplus",
+                years: " years", dkm: "/km²", src: "IMF estimates", demsrc: "Sources: World Bank, UN",
+                vh: "very high", hi: "high", me: "medium", lo: "low" }
+            : { gdp: "PIL", pc: "PIL PRO CAPITE", grow: "CRESCITA PIL", infl: "INFLAZIONE",
+                debt: "DEBITO PUBBLICO", def: "DEFICIT / PIL", dens: "DENSITÀ",
+                life: "ASPETTATIVA DI VITA", hdi: "SVILUPPO UMANO (ISU)",
+                na: "n/d", ofg: " del PIL", defi: "deficit", surp: "avanzo",
+                years: " anni", dkm: " ab./km²", src: "Stime FMI", demsrc: "Fonti: Banca Mondiale, ONU",
+                vh: "molto alto", hi: "alto", me: "medio", lo: "basso" };
           var YR = { ERI: 2019, LKA: 2024, SYR: 2010, PSE: 2024 };
           function yearFor(code) { return YR[code] || 2025; }
           function nf(v, dec) { return new Intl.NumberFormat(loc, { maximumFractionDigits: dec }).format(v); }
+          function grp(v, dec) { return new Intl.NumberFormat(loc, { maximumFractionDigits: dec, useGrouping: "always" }).format(v); }
           function money(bill) {
             if (bill == null) return T.na;
             var s = new Intl.NumberFormat(loc, { notation: "compact", maximumFractionDigits: 1 }).format(bill * 1e9);
             return EN ? "$" + s : s + " $";
           }
-          function perCap(v) {
-            if (v == null) return T.na;
-            var s = new Intl.NumberFormat(loc, { maximumFractionDigits: 0, useGrouping: "always" }).format(v);
-            return EN ? "$" + s : s + " $";
-          }
+          function perCap(v) { if (v == null) return T.na; var s = grp(v, 0); return EN ? "$" + s : s + " $"; }
           function ratio(v) { return v == null ? T.na : nf(v, 1) + "%" + T.ofg; }
+          function signed(v) { return v == null ? T.na : new Intl.NumberFormat(loc, { maximumFractionDigits: 1, signDisplay: "exceptZero" }).format(v) + "%"; }
+          function plain(v) { return v == null ? T.na : nf(v, 1) + "%"; }
           function balance(v) {
             if (v == null) return T.na;
             var s = new Intl.NumberFormat(loc, { maximumFractionDigits: 1, signDisplay: "exceptZero" }).format(v);
             return s + "% (" + (v < 0 ? T.defi : T.surp) + ")";
           }
-          function build(code) {
-            var e = ECON[code];
-            if (!e) return null;
-            return [[T.gdp, money(e[0])], [T.pc, perCap(e[1])], [T.debt, ratio(e[2])], [T.def, balance(e[3])]];
+          function densFmt(v) { return v == null ? T.na : grp(Math.round(v), 0) + T.dkm; }
+          function lifeFmt(v) { return v == null ? T.na : nf(v, 1) + T.years; }
+          function hdiCat(h) { return h >= .8 ? T.vh : h >= .7 ? T.hi : h >= .55 ? T.me : T.lo; }
+          function hdiFmt(v) { return v == null ? T.na : nf(v, 3) + " (" + hdiCat(v) + ")"; }
+          function econRows(code) {
+            var e = ECON[code]; if (!e) return null;
+            return [[T.gdp, money(e[0])], [T.pc, perCap(e[1])], [T.grow, signed(e[4])],
+                    [T.infl, plain(e[5])], [T.debt, ratio(e[2])], [T.def, balance(e[3])]];
+          }
+          function demoRows(code) {
+            var dens = window.__waDens && window.__waDens[code];
+            var d = DEMO[code]; var life = d ? d[0] : null, hdi = d ? d[1] : null;
+            if (dens == null && life == null && hdi == null) return null;
+            return [[T.dens, densFmt(dens)], [T.life, lifeFmt(life)], [T.hdi, hdiFmt(hdi)]];
           }
           function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+          function blk(cls, code, rows, caption) {
+            var b = document.createElement("div");
+            b.className = "dossier-facts " + cls;
+            b.setAttribute("data-code", code);
+            b.innerHTML = rows.map(function (r) {
+              return "<div><span>" + esc(r[0]) + "</span><strong>" + esc(r[1]) + "</strong></div>";
+            }).join("") + '<div class="wa-cap">' + esc(caption) + "</div>";
+            return b;
+          }
           function inject() {
             var aside = document.querySelector("aside.dossier") || document.querySelector(".dossier");
             if (!aside) return;
-            var facts = aside.querySelector(".dossier-facts");
+            var facts = aside.querySelector(".dossier-facts:not(.wa-demo):not(.wa-econ)");
             var codeEl = aside.querySelector(".dossier-code");
             var code = codeEl && codeEl.textContent.trim();
-            var existing = aside.querySelector(".wa-econ");
-            var rows = code ? build(code) : null;
-            if (!facts || !rows) { if (existing) existing.parentNode.removeChild(existing); return; }
-            if (existing && existing.getAttribute("data-code") === code) return; // già presente, non ricreare
-            if (existing) existing.parentNode.removeChild(existing);
-            var block = document.createElement("div");
-            block.className = "dossier-facts wa-econ";
-            block.setAttribute("data-code", code);
-            block.innerHTML = rows.map(function (r) {
-              return "<div><span>" + esc(r[0]) + "</span><strong>" + esc(r[1]) + "</strong></div>";
-            }).join("") + '<div class="wa-econ-yr">' + T.src + " · " + yearFor(code) + "</div>";
-            facts.parentNode.insertBefore(block, facts.nextSibling);
+            var demoEx = aside.querySelector(".wa-demo"), econEx = aside.querySelector(".wa-econ");
+            if (!facts || !code) { if (demoEx) demoEx.remove(); if (econEx) econEx.remove(); return; }
+            var dr = demoRows(code), er = econRows(code);
+            var densAvail = !!(window.__waDens && window.__waDens[code] != null);
+            var haveDemo = !!(demoEx && demoEx.getAttribute("data-code") === code && demoEx.getAttribute("data-dens") === (densAvail ? "1" : "0"));
+            var haveEcon = !!(econEx && econEx.getAttribute("data-code") === code);
+            if ((!!dr === haveDemo) && (!!er === haveEcon)) return; // già a posto, evita cicli
+            if (demoEx) demoEx.remove(); if (econEx) econEx.remove();
+            var after = facts;
+            if (dr) { var db = blk("wa-demo", code, dr, T.demsrc); db.setAttribute("data-dens", densAvail ? "1" : "0"); facts.parentNode.insertBefore(db, after.nextSibling); after = db; }
+            if (er) { var eb = blk("wa-econ", code, er, T.src + " · " + yearFor(code)); after.parentNode.insertBefore(eb, after.nextSibling); }
           }
           function start() {
             inject();
-            new MutationObserver(function () { inject(); }).observe(document.body, { childList: true, subtree: true });
+            // Ri-controlli dopo il caricamento dati (la densità dipende dal dataset)
+            setTimeout(inject, 800); setTimeout(inject, 2500);
+            new MutationObserver(function () { inject(); }).observe(document.body, { childList: true, subtree: true, characterData: true });
           }
           if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
           else start();
@@ -434,8 +466,8 @@
       aside.dossier .dossier-more strong { font-size: .97rem !important; }
       aside.dossier .dossier-code { font-size: 11px !important; }
       /* Blocco economico (PIL, pro capite, debito, deficit): separatore sottile in alto */
-      aside.dossier .wa-econ { border-top: 1px solid rgba(60,70,55,.16) !important; padding-top: 16px !important; margin-top: 2px !important; }
-      aside.dossier .wa-econ .wa-econ-yr { grid-column: 1 / -1 !important; font-size: .72rem !important; color: #6b7280 !important; letter-spacing: .05em !important; margin-top: 4px !important; }
+      aside.dossier .wa-demo, aside.dossier .wa-econ { border-top: 1px solid rgba(60,70,55,.16) !important; padding-top: 16px !important; margin-top: 2px !important; }
+      aside.dossier .wa-cap { grid-column: 1 / -1 !important; font-size: .72rem !important; color: #6b7280 !important; letter-spacing: .05em !important; margin-top: 4px !important; }
 
       /* Mappa piu alta: con lo zoom fisso a 150% resta visibile l'Antartide */
       .map-frame { min-height: 620px !important; }
