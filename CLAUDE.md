@@ -68,8 +68,9 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;
   casella di ricerca nascosta.
 - **Testi**: titolo "Esplora il mondo. / Scopri ogni Paese."; sopra l'elenco "Scegli un Paese dall'elenco.".
-- **Fascia decorativa rimossa**: nascosta `.intro-art` (la foto della vecchia mappa con "PLATE 01 / ORBIS
-  TERRARUM" e le coordinate) nella pagina iniziale, su richiesta utente (`display:none`).
+- **Decori rimossi** (su richiesta, `display:none`): `.intro-art` (foto della vecchia mappa "PLATE 01 / ORBIS
+  TERRARUM" + coordinate, nella pagina iniziale) e `aside.dossier .dossier-image` (riquadro "FIELD NOTE / ..."
+  con ellissi/linee, in fondo al dossier).
 
 ## ⚠️ Patch al bundle da RIAPPLICARE se si riscarica il file da Manus
 
