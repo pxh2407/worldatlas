@@ -291,16 +291,16 @@
             var L = [
               ["o", "OCEANO PACIFICO", "PACIFIC OCEAN", 5, -150],
               ["o", "OCEANO PACIFICO", "PACIFIC OCEAN", -8, 170],
-              ["o", "OCEANO ATLANTICO", "ATLANTIC OCEAN", 33, -42],
+              ["o", "OCEANO ATLANTICO", "ATLANTIC OCEAN", 40, -48],
               ["o", "OCEANO ATLANTICO", "ATLANTIC OCEAN", -22, -15],
               ["o", "OCEANO INDIANO", "INDIAN OCEAN", -25, 78],
               ["o", "OCEANO ARTICO", "ARCTIC OCEAN", 82, 0],
               ["o", "OCEANO MERIDIONALE", "SOUTHERN OCEAN", -58, -120],
               ["s", "Mar Mediterraneo", "Mediterranean Sea", 35, 18],
-              ["s", "Mar dei Caraibi", "Caribbean Sea", 14, -74],
-              ["s", "Mare Arabico", "Arabian Sea", 14, 63],
-              ["s", "Golfo del Bengala", "Bay of Bengal", 13, 88],
-              ["s", "Mar Cinese Merid.", "South China Sea", 12, 114]
+              ["s", "Mar dei Caraibi", "Caribbean Sea", 15, -75],
+              ["s", "Mare Arabico", "Arabian Sea", 17, 60],
+              ["s", "Golfo del Bengala", "Bay of Bengal", 7, 89],
+              ["s", "Mar Cinese Merid.", "South China Sea", 15, 117]
             ];
             var grp = document.createElementNS(NS, "g");
             grp.setAttribute("class", "wa-seas");
@@ -313,7 +313,7 @@
               t.setAttribute("text-anchor", "middle");
               t.setAttribute("fill", isO ? "#5f7387" : "#6f8496");
               t.setAttribute("font-style", "italic");
-              t.setAttribute("font-size", isO ? "11" : "8");
+              t.setAttribute("font-size", isO ? "11" : "7");
               t.setAttribute("letter-spacing", isO ? "1" : "0.3");
               t.setAttribute("opacity", "0.9");
               t.textContent = EN ? it[2] : it[1];
