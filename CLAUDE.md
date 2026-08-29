@@ -76,6 +76,8 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;
   casella di ricerca nascosta.
 - **Testi**: titolo "Esplora il mondo. / Scopri ogni Paese."; sopra l'elenco "Scegli un Paese dall'elenco.".
+- **Credito autore**: `addCredit()` aggiunge nell'intestazione, sotto "EXPLORER / 01", la riga "A cura di Filippo
+  Russo Nuccio" (`.wa-credit`, IBM Plex Mono, blu-ardesia #4a5462; in EN "Curated by Filippo Russo Nuccio").
 - **Decori rimossi** (su richiesta, `display:none`): `.intro-art` (foto della vecchia mappa "PLATE 01 / ORBIS
   TERRARUM" + coordinate, nella pagina iniziale); `.dossier-image` (riquadro "FIELD NOTE / ..." in fondo al dossier);
   `aside.dossier .dossier-top` ("DOSSIER SELEZIONATO" + codice ISO) e `.dossier-compass` ("NOTA APERTA" + bussola)

@@ -321,6 +321,15 @@
             }
             g.appendChild(grp);
           }
+          // Credito autore nell'intestazione (una sola volta)
+          function addCredit() {
+            var sub = document.querySelector(".brand-subtitle");
+            if (!sub || sub.parentNode.querySelector(".wa-credit")) return;
+            var c = document.createElement("div");
+            c.className = "wa-credit";
+            c.textContent = (EN ? "Curated by " : "A cura di ") + "Filippo Russo Nuccio";
+            sub.parentNode.appendChild(c);
+          }
           // Freccia che indica sulla mappa il Paese selezionato (utile per quelli minuscoli)
           function updateArrow() {
             var svg = document.querySelector(".map-frame svg") || document.querySelector("svg");
@@ -361,6 +370,7 @@
           function inject() {
             updateArrow();
             addSeas();
+            addCredit();
             var aside = document.querySelector("aside.dossier") || document.querySelector(".dossier");
             if (!aside) return;
             var facts = aside.querySelector(".dossier-facts:not(.wa-demo):not(.wa-econ)");
@@ -598,6 +608,8 @@
       .dossier-image { display: none !important; }
       /* Rimossi i cartellini in cima al dossier: "DOSSIER SELEZIONATO" (+ codice ISO) e "NOTA APERTA" (bussola) */
       aside.dossier .dossier-top, aside.dossier .dossier-compass { display: none !important; }
+      /* Credito autore sotto il titolo nell'intestazione */
+      .wa-credit { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .08em; color: #4a5462; margin-top: 4px; }
 
       /* Manina che punta piu piccola sulle nazioni (hotspot sulla punta del dito) */
       .country-shape {
