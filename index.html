@@ -336,13 +336,13 @@
             var tips = EN ? [
               "<b>Pick a country</b>: click a country on the map (or in the list below) to see its data. A red arrow shows where it is.",
               "<b>Zoom</b>: use the <b>+</b> and <b>&minus;</b> buttons at the top left of the map (<b>&#8635;</b> resets the view).",
-              "<b>Move the map</b>: hover over the sea (the little hand appears), press and drag. &#9888; The map does not move right away: keep the button pressed and <b>wait a couple of seconds</b> before it starts moving.",
+              "<b>Move the map</b>: the quickest way is the <b>arrows &#8593; &#8595; &#8592; &#8594;</b> at the bottom right of the map &mdash; each click shifts it right away. You can also drag with the hand by holding down over the sea (that way the map may take a couple of seconds to start).",
               "<b>Language</b>: the <b>IT / EN</b> button at the top right switches language.",
               "<b>Seas and oceans</b>: their names are written on the map; zoom in to read them better."
             ] : [
               "<b>Scegli un Paese</b>: clicca su un Paese sulla mappa (o nell'elenco in fondo) per vedere le sue informazioni. Una freccia rossa indica dove si trova.",
               "<b>Ingrandisci</b>: usa i pulsanti <b>+</b> e <b>&minus;</b> in alto a sinistra sulla mappa (<b>&#8635;</b> riporta alla vista iniziale).",
-              "<b>Sposta la mappa</b>: porta il mouse sul mare (compare la manina), tieni premuto e trascina. &#9888; La mappa non si sposta subito: tieni premuto il tasto e <b>aspetta un paio di secondi</b> prima che inizi a muoversi.",
+              "<b>Sposta la mappa</b>: il modo più rapido sono le <b>frecce &#8593; &#8595; &#8592; &#8594;</b> in basso a destra sulla mappa &mdash; ogni clic la sposta subito. In alternativa puoi trascinare con la manina tenendo premuto sul mare (così però la mappa può metterci un paio di secondi a partire).",
               "<b>Lingua</b>: il pulsante <b>IT / EN</b> in alto a destra cambia la lingua.",
               "<b>Mari e oceani</b>: i loro nomi sono scritti sulla mappa; ingrandendo si leggono meglio."
             ];
@@ -365,6 +365,37 @@
             ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
             ov.querySelector(".wa-help-close").addEventListener("click", close);
             ov.querySelector(".wa-help-ok").addEventListener("click", close);
+          }
+          // Spostamento rapido della mappa con un clic (frecce): simula un piccolo trascinamento,
+          // così la mappa "salta" subito senza il ridisegno continuo del trascinamento a mano.
+          function panStep(fx, fy) {
+            var svg = document.querySelector(".world-map") || document.querySelector(".map-frame svg") || document.querySelector("svg");
+            if (!svg) return;
+            svg.setPointerCapture = function () {}; svg.releasePointerCapture = function () {}; svg.hasPointerCapture = function () { return false; };
+            var rect = svg.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+            var dx = fx * rect.width, dy = fy * rect.height;
+            function pe(type, x, y) { return new PointerEvent(type, { bubbles: true, cancelable: true, pointerId: 1, pointerType: "mouse", clientX: x, clientY: y, button: 0, view: window }); }
+            svg.dispatchEvent(pe("pointerdown", cx, cy));
+            svg.dispatchEvent(pe("pointermove", cx + dx, cy + dy));
+            svg.dispatchEvent(pe("pointerup", cx + dx, cy + dy));
+            delete svg.setPointerCapture; delete svg.releasePointerCapture; delete svg.hasPointerCapture;
+          }
+          function addPad() {
+            var frame = document.querySelector(".map-frame");
+            if (!frame || frame.querySelector(".wa-pad")) return;
+            var S = 0.32; // passo = 32% della mappa. Freccia = direzione da guardare (modello "cannocchiale")
+            var dirs = [["up", "↑", 0, S], ["left", "←", S, 0], ["right", "→", -S, 0], ["down", "↓", 0, -S]];
+            var pad = document.createElement("div");
+            pad.className = "wa-pad";
+            dirs.forEach(function (d) {
+              var b = document.createElement("button"); b.type = "button"; b.setAttribute("data-d", d[0]); b.textContent = d[1];
+              b.setAttribute("aria-label", "Sposta la mappa");
+              b.addEventListener("click", function (e) { e.stopPropagation(); panStep(d[2], d[3]); });
+              pad.appendChild(b);
+            });
+            if (getComputedStyle(frame).position === "static") frame.style.position = "relative";
+            frame.appendChild(pad);
           }
           // Freccia che indica sulla mappa il Paese selezionato (utile per quelli minuscoli)
           function updateArrow() {
@@ -408,6 +439,7 @@
             addSeas();
             addCredit();
             addHelp();
+            addPad();
             var aside = document.querySelector("aside.dossier") || document.querySelector(".dossier");
             if (!aside) return;
             var facts = aside.querySelector(".dossier-facts:not(.wa-demo):not(.wa-econ)");
@@ -672,6 +704,16 @@
          mentre trascini la manina si chiude. Sui Paesi resta la manina che punta (per selezionarli). */
       .map-frame svg { cursor: grab !important; }
       .map-frame svg:active { cursor: grabbing !important; }
+
+      /* Tastierino a frecce per spostare la mappa a scatti (alternativa rapida al trascinamento) */
+      .wa-pad { position: absolute; right: 14px; bottom: 48px; z-index: 6; display: grid; grid-template-columns: repeat(3, 36px); grid-template-rows: repeat(3, 36px); gap: 5px; }
+      .wa-pad button { background: rgba(250,248,242,.94); color: #12253b; border: 1px solid rgba(18,37,59,.2); border-radius: 9px; font-size: 20px; line-height: 1; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.18); padding: 0; }
+      .wa-pad button:hover { background: #ffffff; }
+      .wa-pad button:active { background: #eae6db; }
+      .wa-pad [data-d="up"] { grid-column: 2; grid-row: 1; }
+      .wa-pad [data-d="left"] { grid-column: 1; grid-row: 2; }
+      .wa-pad [data-d="right"] { grid-column: 3; grid-row: 2; }
+      .wa-pad [data-d="down"] { grid-column: 2; grid-row: 3; }
 
       /* Confini terrestri e marini: un'unica linea bianca sottile, uguale a ogni zoom
          (vector-effect evita che il bordo diventi una fascia spessa ingrandendo la mappa) */

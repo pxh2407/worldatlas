@@ -76,6 +76,11 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;
   casella di ricerca nascosta.
 - **Testi**: titolo "Esplora il mondo. / Scopri ogni Paese."; sopra l'elenco "Scegli un Paese dall'elenco.".
+- **Frecce per spostare la mappa** (`.wa-pad`): `addPad()` aggiunge in basso a destra sulla mappa un tastierino
+  ↑↓←→; ogni clic sposta la mappa a scatti (istantaneo), alternativa rapida al trascinamento (lento sui PC datati
+  perché ridisegna 258 Paesi a ogni movimento). `panStep()` simula un piccolo trascinamento (eventi Pointer sul
+  `.world-map`, con `setPointerCapture` neutralizzato) così lo stato pan dell'app resta sincronizzato. Modello
+  "cannocchiale": la freccia mostra quella direzione (↑=nord…). NON tocca il bundle.
 - **Pulsante "Come funziona"**: `addHelp()` aggiunge in basso a destra un pulsante (`.wa-help-btn`) che apre una
   finestra (`.wa-help-overlay`/`.wa-help-card`) con le istruzioni d'uso in 5 punti (scelta Paese, zoom, spostamento
   mappa, lingua, nomi mari), IT/EN. Include l'avviso che trascinando la mappa non si muove subito: tenere premuto
