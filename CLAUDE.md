@@ -77,8 +77,12 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   casella di ricerca nascosta.
 - **Testi**: titolo "Esplora il mondo. / Scopri ogni Paese."; sopra l'elenco "Scegli un Paese dall'elenco.".
 - **Decori rimossi** (su richiesta, `display:none`): `.intro-art` (foto della vecchia mappa "PLATE 01 / ORBIS
-  TERRARUM" + coordinate, nella pagina iniziale) e `aside.dossier .dossier-image` (riquadro "FIELD NOTE / ..."
-  con ellissi/linee, in fondo al dossier).
+  TERRARUM" + coordinate, nella pagina iniziale); `.dossier-image` (riquadro "FIELD NOTE / ..." in fondo al dossier);
+  `aside.dossier .dossier-top` ("DOSSIER SELEZIONATO" + codice ISO) e `.dossier-compass` ("NOTA APERTA" + bussola)
+  in cima al dossier. NB: il codice ISO resta nel DOM (nascosto) perché lo script lo legge per capire il Paese.
+- **Nota di ripiego nascosta**: i Paesi senza descrizione curata mostravano la nota "Seleziona un Paese sulla
+  mappa…"; in `inject()` la `.dossier-note` viene nascosta se inizia con quel testo (le descrizioni vere di
+  Italia/Giappone/ecc. restano). Il pannello è anche nascosto del tutto nello stato vuoto (code "—").
 
 ## ⚠️ Patch al bundle da RIAPPLICARE se si riscarica il file da Manus
 

@@ -374,6 +374,10 @@
               lastSel = null; if (flagEx) flagEx.remove(); if (demoEx) demoEx.remove(); if (econEx) econEx.remove(); return;
             }
             aside.style.display = "";
+            // Nasconde la nota di ripiego ("Seleziona un Paese sulla mappa…") dei Paesi senza descrizione curata;
+            // le descrizioni vere (Italia, Giappone, ecc.) restano visibili.
+            var noteEl = aside.querySelector(".dossier-note");
+            if (noteEl) noteEl.style.display = /^Seleziona un Paese sulla mappa/.test(noteEl.textContent.trim()) ? "none" : "";
             if (code !== lastSel) { lastSel = code; scrollToMap(); }
             // Bandiera vera (immagine locale) sopra il nome del Paese
             var flagCode = window.__waFlag && window.__waFlag[code];
@@ -592,6 +596,8 @@
 
       /* Rimosso il riquadro decorativo "FIELD NOTE / ..." in fondo al dossier */
       .dossier-image { display: none !important; }
+      /* Rimossi i cartellini in cima al dossier: "DOSSIER SELEZIONATO" (+ codice ISO) e "NOTA APERTA" (bussola) */
+      aside.dossier .dossier-top, aside.dossier .dossier-compass { display: none !important; }
 
       /* Manina che punta piu piccola sulle nazioni (hotspot sulla punta del dito) */
       .country-shape {
