@@ -327,7 +327,7 @@
             if (!sub || sub.parentNode.querySelector(".wa-credit")) return;
             var c = document.createElement("div");
             c.className = "wa-credit";
-            c.textContent = (EN ? "Curated by " : "A cura di ") + "Filippo Russo Nuccio";
+            c.textContent = (EN ? "Curated by " : "A cura di ") + "Filippo Nuccio Russo";
             sub.parentNode.appendChild(c);
           }
           // Freccia che indica sulla mappa il Paese selezionato (utile per quelli minuscoli)
@@ -613,7 +613,7 @@
       /* Rimossi "01" e "Carta politica" sopra il titolo della mappa (resta "Il mondo, a colpo d'occhio") */
       .map-toolbar .section-index, .map-toolbar .eyebrow { display: none !important; }
       /* Credito autore sotto il titolo nell'intestazione */
-      .wa-credit { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .07em; color: #4a5462; margin-top: 3px; }
+      .wa-credit { font-family: "IBM Plex Mono", monospace; font-size: 8px; letter-spacing: 0; word-spacing: -1px; color: #4a5462; margin-top: 3px; }
 
       /* Manina che punta piu piccola sulle nazioni (hotspot sulla punta del dito) */
       .country-shape {

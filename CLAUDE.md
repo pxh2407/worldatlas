@@ -77,8 +77,8 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   casella di ricerca nascosta.
 - **Testi**: titolo "Esplora il mondo. / Scopri ogni Paese."; sopra l'elenco "Scegli un Paese dall'elenco.".
 - **Credito autore**: `addCredit()` aggiunge nell'intestazione, sotto "World Atlas", la riga "A cura di Filippo
-  Russo Nuccio" (`.wa-credit`, IBM Plex Mono 9px, blu-ardesia #4a5462; in EN "Curated by Filippo Russo Nuccio").
-  Rimossa la scritta decorativa "EXPLORER / 01" (`.brand-subtitle { display:none }`).
+  Nuccio Russo" (`.wa-credit`, IBM Plex Mono 8px, letter-spacing 0/word-spacing -1px, blu-ardesia #4a5462; in EN
+  "Curated by ..."). Rimossa la scritta decorativa "EXPLORER / 01" (`.brand-subtitle { display:none }`).
 - **Decori rimossi** (su richiesta, `display:none`): `.intro-art` (foto della vecchia mappa "PLATE 01 / ORBIS
   TERRARUM" + coordinate, nella pagina iniziale); `.dossier-image` (riquadro "FIELD NOTE / ..." in fondo al dossier);
   `aside.dossier .dossier-top` ("DOSSIER SELEZIONATO" + codice ISO) e `.dossier-compass` ("NOTA APERTA" + bussola)
