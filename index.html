@@ -330,6 +330,42 @@
             c.textContent = (EN ? "Curated by " : "A cura di ") + "Filippo Nuccio Russo";
             sub.parentNode.appendChild(c);
           }
+          // Pulsante "Come funziona" + finestra con le istruzioni d'uso (una sola volta)
+          function addHelp() {
+            if (document.querySelector(".wa-help-btn")) return;
+            var tips = EN ? [
+              "<b>Pick a country</b>: click a country on the map (or in the list below) to see its data. A red arrow shows where it is.",
+              "<b>Zoom</b>: use the <b>+</b> and <b>&minus;</b> buttons at the top left of the map (<b>&#8635;</b> resets the view).",
+              "<b>Move the map</b>: hover over the sea (the little hand appears), press and drag. &#9888; The map does not move right away: keep the button pressed and <b>wait a couple of seconds</b> before it starts moving.",
+              "<b>Language</b>: the <b>IT / EN</b> button at the top right switches language.",
+              "<b>Seas and oceans</b>: their names are written on the map; zoom in to read them better."
+            ] : [
+              "<b>Scegli un Paese</b>: clicca su un Paese sulla mappa (o nell'elenco in fondo) per vedere le sue informazioni. Una freccia rossa indica dove si trova.",
+              "<b>Ingrandisci</b>: usa i pulsanti <b>+</b> e <b>&minus;</b> in alto a sinistra sulla mappa (<b>&#8635;</b> riporta alla vista iniziale).",
+              "<b>Sposta la mappa</b>: porta il mouse sul mare (compare la manina), tieni premuto e trascina. &#9888; La mappa non si sposta subito: tieni premuto il tasto e <b>aspetta un paio di secondi</b> prima che inizi a muoversi.",
+              "<b>Lingua</b>: il pulsante <b>IT / EN</b> in alto a destra cambia la lingua.",
+              "<b>Mari e oceani</b>: i loro nomi sono scritti sulla mappa; ingrandendo si leggono meglio."
+            ];
+            var btn = document.createElement("button");
+            btn.className = "wa-help-btn"; btn.type = "button";
+            btn.textContent = (EN ? "How it works" : "Come funziona");
+            document.body.appendChild(btn);
+            var ov = document.createElement("div");
+            ov.className = "wa-help-overlay"; ov.style.display = "none";
+            ov.innerHTML = '<div class="wa-help-card" role="dialog" aria-modal="true">'
+              + '<button class="wa-help-close" type="button" aria-label="Chiudi">&times;</button>'
+              + '<h3>' + (EN ? "How to use the atlas" : "Come usare l&#39;atlante") + "</h3>"
+              + "<ul>" + tips.map(function (t) { return "<li>" + t + "</li>"; }).join("") + "</ul>"
+              + '<button class="wa-help-ok" type="button">' + (EN ? "Got it" : "Ho capito") + "</button>"
+              + "</div>";
+            document.body.appendChild(ov);
+            function open() { ov.style.display = "flex"; }
+            function close() { ov.style.display = "none"; }
+            btn.addEventListener("click", open);
+            ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+            ov.querySelector(".wa-help-close").addEventListener("click", close);
+            ov.querySelector(".wa-help-ok").addEventListener("click", close);
+          }
           // Freccia che indica sulla mappa il Paese selezionato (utile per quelli minuscoli)
           function updateArrow() {
             var svg = document.querySelector(".map-frame svg") || document.querySelector("svg");
@@ -371,6 +407,7 @@
             updateArrow();
             addSeas();
             addCredit();
+            addHelp();
             var aside = document.querySelector("aside.dossier") || document.querySelector(".dossier");
             if (!aside) return;
             var facts = aside.querySelector(".dossier-facts:not(.wa-demo):not(.wa-econ)");
@@ -614,6 +651,17 @@
       .map-toolbar .section-index, .map-toolbar .eyebrow { display: none !important; }
       /* Credito autore sotto il titolo nell'intestazione */
       .wa-credit { font-family: "IBM Plex Mono", monospace; font-size: 8px; letter-spacing: 0; word-spacing: -1px; color: #4a5462; margin-top: 3px; }
+      /* Pulsante "Come funziona" e finestra istruzioni */
+      .wa-help-btn { position: fixed; bottom: 20px; right: 20px; z-index: 9998; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .03em; background: #12253b; color: #f3efe6; border: none; border-radius: 22px; padding: 11px 20px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.28); }
+      .wa-help-btn:hover { background: #1c3350; }
+      .wa-help-overlay { position: fixed; inset: 0; z-index: 100000; background: rgba(18,37,59,.55); display: flex; align-items: center; justify-content: center; padding: 20px; }
+      .wa-help-card { position: relative; max-width: 470px; width: 100%; max-height: 85vh; overflow: auto; background: #faf8f2; color: #33404f; border-radius: 14px; padding: 26px 26px 22px; box-shadow: 0 12px 40px rgba(0,0,0,.35); font-family: system-ui, -apple-system, Segoe UI, sans-serif; }
+      .wa-help-card h3 { font-family: Georgia, "Times New Roman", serif; font-size: 22px; color: #12253b; margin: 0 0 14px; }
+      .wa-help-card ul { margin: 0; padding-left: 20px; }
+      .wa-help-card li { font-size: 15.5px; line-height: 1.6; margin-bottom: 12px; }
+      .wa-help-card b { color: #12253b; }
+      .wa-help-close { position: absolute; top: 8px; right: 14px; background: none; border: none; font-size: 28px; line-height: 1; color: #7a8494; cursor: pointer; }
+      .wa-help-ok { display: block; margin: 18px 0 0 auto; background: #c9352a; color: #fff; border: none; border-radius: 20px; padding: 9px 22px; font-size: 14px; cursor: pointer; }
 
       /* Manina che punta piu piccola sulle nazioni (hotspot sulla punta del dito) */
       .country-shape {

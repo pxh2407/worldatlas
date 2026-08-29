@@ -76,6 +76,10 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   la rotella scorre la pagina (zoom con i pulsanti +/−); manina del cursore più piccola;
   casella di ricerca nascosta.
 - **Testi**: titolo "Esplora il mondo. / Scopri ogni Paese."; sopra l'elenco "Scegli un Paese dall'elenco.".
+- **Pulsante "Come funziona"**: `addHelp()` aggiunge in basso a destra un pulsante (`.wa-help-btn`) che apre una
+  finestra (`.wa-help-overlay`/`.wa-help-card`) con le istruzioni d'uso in 5 punti (scelta Paese, zoom, spostamento
+  mappa, lingua, nomi mari), IT/EN. Include l'avviso che trascinando la mappa non si muove subito: tenere premuto
+  e aspettare un paio di secondi. Chiusura con ×, "Ho capito" o clic fuori.
 - **Credito autore**: `addCredit()` aggiunge nell'intestazione, sotto "World Atlas", la riga "A cura di Filippo
   Nuccio Russo" (`.wa-credit`, IBM Plex Mono 8px, letter-spacing 0/word-spacing -1px, blu-ardesia #4a5462; in EN
   "Curated by ..."). Rimossa la scritta decorativa "EXPLORER / 01" (`.brand-subtitle { display:none }`).
