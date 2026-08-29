@@ -277,6 +277,50 @@
             }).join("") + '<div class="wa-cap">' + esc(caption) + "</div>";
             return b;
           }
+          // Nomi di oceani e mari sulla mappa (testo SVG nello stesso gruppo dei Paesi,
+          // così seguono zoom e spostamenti; non cliccabili). Aggiunti una volta sola.
+          function addSeas() {
+            var svg = document.querySelector(".map-frame svg") || document.querySelector("svg");
+            if (!svg) return;
+            var g = svg.querySelector("g"); if (!g) return;
+            if (g.querySelector(".wa-seas")) return; // già presenti
+            var NS = "http://www.w3.org/2000/svg";
+            function px(lon) { return 1.445 * lon + 452.8; }
+            function py(lat) { return 248 - 88.6 * Math.log(Math.tan((45 + lat / 2) * Math.PI / 180)); }
+            // [tipo o=oceano/s=mare, IT, EN, lat, lon]
+            var L = [
+              ["o", "OCEANO PACIFICO", "PACIFIC OCEAN", 5, -150],
+              ["o", "OCEANO PACIFICO", "PACIFIC OCEAN", -8, 170],
+              ["o", "OCEANO ATLANTICO", "ATLANTIC OCEAN", 33, -42],
+              ["o", "OCEANO ATLANTICO", "ATLANTIC OCEAN", -22, -15],
+              ["o", "OCEANO INDIANO", "INDIAN OCEAN", -25, 78],
+              ["o", "OCEANO ARTICO", "ARCTIC OCEAN", 82, 0],
+              ["o", "OCEANO MERIDIONALE", "SOUTHERN OCEAN", -58, -120],
+              ["s", "Mar Mediterraneo", "Mediterranean Sea", 35, 18],
+              ["s", "Mar dei Caraibi", "Caribbean Sea", 14, -74],
+              ["s", "Mare Arabico", "Arabian Sea", 14, 63],
+              ["s", "Golfo del Bengala", "Bay of Bengal", 13, 88],
+              ["s", "Mar Cinese Merid.", "South China Sea", 12, 114]
+            ];
+            var grp = document.createElementNS(NS, "g");
+            grp.setAttribute("class", "wa-seas");
+            grp.setAttribute("pointer-events", "none");
+            for (var i = 0; i < L.length; i++) {
+              var it = L[i], isO = it[0] === "o";
+              var t = document.createElementNS(NS, "text");
+              t.setAttribute("x", px(it[4]).toFixed(1));
+              t.setAttribute("y", py(it[3]).toFixed(1));
+              t.setAttribute("text-anchor", "middle");
+              t.setAttribute("fill", isO ? "#5f7387" : "#6f8496");
+              t.setAttribute("font-style", "italic");
+              t.setAttribute("font-size", isO ? "11" : "8");
+              t.setAttribute("letter-spacing", isO ? "1" : "0.3");
+              t.setAttribute("opacity", "0.9");
+              t.textContent = EN ? it[2] : it[1];
+              grp.appendChild(t);
+            }
+            g.appendChild(grp);
+          }
           // Freccia che indica sulla mappa il Paese selezionato (utile per quelli minuscoli)
           function updateArrow() {
             var svg = document.querySelector(".map-frame svg") || document.querySelector("svg");
@@ -316,6 +360,7 @@
           }
           function inject() {
             updateArrow();
+            addSeas();
             var aside = document.querySelector("aside.dossier") || document.querySelector(".dossier");
             if (!aside) return;
             var facts = aside.querySelector(".dossier-facts:not(.wa-demo):not(.wa-econ)");

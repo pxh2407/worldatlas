@@ -59,6 +59,10 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   spessore **cresceva con lo zoom** (a 150%+ le coste frastagliate diventavano una fascia bianca spessa, e nei
   Paesi piccoli il bordo copriva il colore lasciando solo un puntino). Ora è un'unica linea bianca uniforme a
   ogni ingrandimento, coste e confini interni compresi.
+- **Nomi di oceani e mari** sulla mappa (`.wa-seas`): scritte SVG in blu-grigio corsivo (oceani font 11, mari 8)
+  aggiunte da `addSeas()` nel gruppo SVG dei Paesi (seguono zoom/spostamenti, `pointer-events:none`). Posizioni
+  calcolate con la proiezione Mercator del bundle: `x=1.445·lon+452.8`, `y=248−88.6·ln(tan(45+lat/2))` (calibrata
+  sui centroidi dei Paesi). Testi IT/EN. 7 oceani (Pacifico ×2, Atlantico ×2, Indiano, Artico, Meridionale) + 5 mari.
 - **Scroll alla mappa alla selezione**: quando cambi Paese, `scrollToMap()` (in `index.html`, chiamata da
   `inject()` al variare del codice, con `lastSel`) porta la `.map-frame` in vista con `scrollIntoView({block:"center"})`,
   così vedi tutta la mappa col Paese evidenziato. Sostituisce lo scroll fisso `top:260` del bundle (tolto, patch #11).
