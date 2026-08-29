@@ -620,6 +620,11 @@
         cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDMyIDMyIj48ZyBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMTIiIHk9IjMiIHdpZHRoPSI1IiBoZWlnaHQ9IjE1IiByeD0iMi41Ii8+PHJlY3QgeD0iOSIgeT0iMTMiIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgcng9IjYiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTgiIHI9IjMiLz48L2c+PGcgZmlsbD0iIzExMTExMSI+PHJlY3QgeD0iMTIiIHk9IjMiIHdpZHRoPSI1IiBoZWlnaHQ9IjE1IiByeD0iMi41Ii8+PHJlY3QgeD0iOSIgeT0iMTMiIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgcng9IjYiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTgiIHI9IjMiLz48L2c+PC9zdmc+Cg==") 9 2, pointer !important;
       }
 
+      /* Sul mare (sfondo mappa) manina aperta: fa capire che lì si può "afferrare" e trascinare la mappa;
+         mentre trascini la manina si chiude. Sui Paesi resta la manina che punta (per selezionarli). */
+      .map-frame svg { cursor: grab !important; }
+      .map-frame svg:active { cursor: grabbing !important; }
+
       /* Confini terrestri e marini: un'unica linea bianca sottile, uguale a ogni zoom
          (vector-effect evita che il bordo diventi una fascia spessa ingrandendo la mappa) */
       .country-shape {
