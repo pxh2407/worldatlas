@@ -81,10 +81,10 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   perché ridisegna 258 Paesi a ogni movimento). `panStep()` simula un piccolo trascinamento (eventi Pointer sul
   `.world-map`, con `setPointerCapture` neutralizzato) così lo stato pan dell'app resta sincronizzato. Modello
   "cannocchiale": la freccia mostra quella direzione (↑=nord…). NON tocca il bundle.
-- **Pulsante "Come funziona"**: `addHelp()` aggiunge in basso a destra un pulsante (`.wa-help-btn`) che apre una
-  finestra (`.wa-help-overlay`/`.wa-help-card`) con le istruzioni d'uso in 5 punti (scelta Paese, zoom, spostamento
-  mappa, lingua, nomi mari), IT/EN. Include l'avviso che trascinando la mappa non si muove subito: tenere premuto
-  e aspettare un paio di secondi. Chiusura con ×, "Ho capito" o clic fuori.
+- **Pulsante "Come funziona"**: `addHelp()` aggiunge in basso a **sinistra** (per non coprire le frecce del `.wa-pad`
+  a destra) un pulsante (`.wa-help-btn`) che apre una finestra (`.wa-help-overlay`/`.wa-help-card`) con le istruzioni
+  in 6 punti (scelta Paese, come vedere la scheda scorrendo sotto la mappa, zoom, spostamento con le frecce, lingua,
+  nomi mari), IT/EN. Chiusura con ×, "Ho capito" o clic fuori.
 - **Credito autore**: `addCredit()` aggiunge nell'intestazione, sotto "World Atlas", la riga "A cura di Filippo
   Nuccio Russo" (`.wa-credit`, IBM Plex Mono 8px, letter-spacing 0/word-spacing -1px, blu-ardesia #4a5462; in EN
   "Curated by ..."). Rimossa la scritta decorativa "EXPLORER / 01" (`.brand-subtitle { display:none }`).
