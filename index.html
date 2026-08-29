@@ -366,9 +366,14 @@
             var facts = aside.querySelector(".dossier-facts:not(.wa-demo):not(.wa-econ)");
             var codeEl = aside.querySelector(".dossier-code");
             var code = codeEl && codeEl.textContent.trim();
+            if (code === "—") code = null; // stato vuoto (nessun Paese selezionato)
             var demoEx = aside.querySelector(".wa-demo"), econEx = aside.querySelector(".wa-econ");
             var flagEx = aside.querySelector(".wa-flag");
-            if (!facts || !code) { lastSel = null; if (flagEx) flagEx.remove(); if (demoEx) demoEx.remove(); if (econEx) econEx.remove(); return; }
+            if (!facts || !code) {
+              if (!code) aside.style.display = "none"; // nascondi il segnaposto finché non si seleziona
+              lastSel = null; if (flagEx) flagEx.remove(); if (demoEx) demoEx.remove(); if (econEx) econEx.remove(); return;
+            }
+            aside.style.display = "";
             if (code !== lastSel) { lastSel = code; scrollToMap(); }
             // Bandiera vera (immagine locale) sopra il nome del Paese
             var flagCode = window.__waFlag && window.__waFlag[code];
