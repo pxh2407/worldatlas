@@ -376,7 +376,7 @@
             svg.setPointerCapture = function () {}; svg.releasePointerCapture = function () {}; svg.hasPointerCapture = function () { return false; };
             var rect = svg.getBoundingClientRect();
             var cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
-            var dx = fx * rect.width, dy = fy * rect.height;
+            var dx = fx, dy = fy;
             function pe(type, x, y) { return new PointerEvent(type, { bubbles: true, cancelable: true, pointerId: 1, pointerType: "mouse", clientX: x, clientY: y, button: 0, view: window }); }
             svg.dispatchEvent(pe("pointerdown", cx, cy));
             svg.dispatchEvent(pe("pointermove", cx + dx, cy + dy));
@@ -386,7 +386,7 @@
           function addPad() {
             var frame = document.querySelector(".map-frame");
             if (!frame || frame.querySelector(".wa-pad")) return;
-            var S = 0.32; // passo = 32% della mappa. Freccia = direzione da guardare (modello "cannocchiale")
+            var S = 100; // passo fisso = 100 px a clic. Freccia = direzione da guardare (modello "cannocchiale")
             var dirs = [["up", "↑", 0, S], ["left", "←", S, 0], ["right", "→", -S, 0], ["down", "↓", 0, -S]];
             var pad = document.createElement("div");
             pad.className = "wa-pad";
