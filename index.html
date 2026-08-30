@@ -418,9 +418,9 @@
             g.setAttribute("class", "wa-arrow");
             g.setAttribute("data-key", key);
             g.setAttribute("pointer-events", "none");
-            var w = 3.5, h = 11, gap = 2; // freccia (triangolo) che punta in giù verso il Paese
+            var w = 3.5, h = 11; // freccia (triangolo): la punta coincide col bordo superiore del Paese
             var tri = document.createElementNS(NS, "path");
-            tri.setAttribute("d", "M" + (cx - w) + " " + (cy - gap - h) + " L" + (cx + w) + " " + (cy - gap - h) + " L" + cx + " " + (cy - gap) + " Z");
+            tri.setAttribute("d", "M" + (cx - w) + " " + (bb.y - h) + " L" + (cx + w) + " " + (bb.y - h) + " L" + cx + " " + bb.y + " Z");
             tri.setAttribute("fill", "none");
             tri.setAttribute("stroke", "#1a2331");
             tri.setAttribute("stroke-width", "1");
