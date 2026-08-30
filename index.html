@@ -386,7 +386,7 @@
           function addPad() {
             var frame = document.querySelector(".map-frame");
             if (!frame || frame.querySelector(".wa-pad")) return;
-            var S = 100; // passo fisso = 100 px a clic. Freccia = direzione da guardare (modello "cannocchiale")
+            var S = 50; // passo fisso = 50 px a clic. Freccia = direzione da guardare (modello "cannocchiale")
             var dirs = [["up", "↑", 0, S], ["left", "←", S, 0], ["right", "→", -S, 0], ["down", "↓", 0, -S]];
             var pad = document.createElement("div");
             pad.className = "wa-pad";

@@ -80,7 +80,7 @@ Le poche patch al bundle sono elencate nella sezione seguente.
   casella di ricerca nascosta.
 - **Testi**: titolo "Esplora il mondo. / Scopri ogni Paese."; sopra l'elenco "Scegli un Paese dall'elenco.".
 - **Frecce per spostare la mappa** (`.wa-pad`): `addPad()` aggiunge in basso a destra sulla mappa un tastierino
-  ↑↓←→; ogni clic sposta la mappa di **100 px fissi** (a scatti, istantaneo), alternativa rapida al trascinamento (lento sui PC datati
+  ↑↓←→; ogni clic sposta la mappa di **50 px fissi** (a scatti, istantaneo), alternativa rapida al trascinamento (lento sui PC datati
   perché ridisegna 258 Paesi a ogni movimento). `panStep()` simula un piccolo trascinamento (eventi Pointer sul
   `.world-map`, con `setPointerCapture` neutralizzato) così lo stato pan dell'app resta sincronizzato. Modello
   "cannocchiale": la freccia mostra quella direzione (↑=nord…). NON tocca il bundle.
