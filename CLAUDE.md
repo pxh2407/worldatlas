@@ -118,6 +118,8 @@ Se in futuro si sostituisce `assets/index-*.js` con una nuova build di Manus, ri
     aggiungere `.sort((a,b)=>Pl(a).localeCompare(Pl(b)))` (ordina solo l'elenco `st`, non la mappa).
 11. **Niente scroll al clic sulla lista:** nella `.country-row`, `onClick:()=>{w(I),window.scrollTo({top:260,behavior:"smooth"})}`
     → `onClick:()=>{w(I)}` (selezionare un Paese dall'elenco non fa più saltare la pagina).
+12. **Passo dello zoom +/−:** i pulsanti erano `rt(X+.5)` / `rt(X-.5)` (±50% a clic) → `rt(X+.1)` / `rt(X-.1)`
+    (±10% a clic, ingrandimento/riduzione più graduale).
 
 ## Aggiornare / pubblicare
 
