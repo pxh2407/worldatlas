@@ -418,12 +418,12 @@
             g.setAttribute("class", "wa-arrow");
             g.setAttribute("data-key", key);
             g.setAttribute("pointer-events", "none");
-            var w = 5, h = 12, gap = 2; // freccia (triangolo) che punta in giù verso il Paese
+            var w = 3.5, h = 11, gap = 2; // freccia (triangolo) che punta in giù verso il Paese
             var tri = document.createElementNS(NS, "path");
             tri.setAttribute("d", "M" + (cx - w) + " " + (cy - gap - h) + " L" + (cx + w) + " " + (cy - gap - h) + " L" + cx + " " + (cy - gap) + " Z");
             tri.setAttribute("fill", "none");
             tri.setAttribute("stroke", "#1a2331");
-            tri.setAttribute("stroke-width", "1.6");
+            tri.setAttribute("stroke-width", "1");
             tri.setAttribute("stroke-linejoin", "round");
             tri.setAttribute("vector-effect", "non-scaling-stroke");
             g.appendChild(tri);
