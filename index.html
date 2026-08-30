@@ -708,14 +708,14 @@
       .map-frame svg:active { cursor: grabbing !important; }
 
       /* Tastierino a frecce per spostare la mappa a scatti (alternativa rapida al trascinamento) */
-      .wa-pad { position: absolute; right: 14px; bottom: 48px; z-index: 6; display: grid; grid-template-columns: repeat(3, 36px); grid-template-rows: repeat(3, 36px); gap: 5px; }
-      .wa-pad button { background: rgba(250,248,242,.94); color: #12253b; border: 1px solid rgba(18,37,59,.2); border-radius: 9px; font-size: 20px; line-height: 1; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.18); padding: 0; }
+      .wa-pad { position: absolute; right: 14px; bottom: 48px; z-index: 6; display: grid; grid-template-columns: repeat(3, 28px); grid-template-rows: repeat(3, 28px); gap: 2px; }
+      .wa-pad button { background: rgba(250,248,242,.94); color: #12253b; border: 1px solid rgba(18,37,59,.2); border-radius: 7px; font-size: 15px; line-height: 1; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.18); padding: 0; }
       .wa-pad button:hover { background: #ffffff; }
       .wa-pad button:active { background: #eae6db; }
-      .wa-pad [data-d="up"] { grid-column: 2; grid-row: 1; }
-      .wa-pad [data-d="left"] { grid-column: 1; grid-row: 2; }
-      .wa-pad [data-d="right"] { grid-column: 3; grid-row: 2; }
-      .wa-pad [data-d="down"] { grid-column: 2; grid-row: 3; }
+      .wa-pad [data-d="up"] { grid-column: 2; grid-row: 1; margin-bottom: -9px; }
+      .wa-pad [data-d="left"] { grid-column: 1; grid-row: 2; margin-right: -9px; }
+      .wa-pad [data-d="right"] { grid-column: 3; grid-row: 2; margin-left: -9px; }
+      .wa-pad [data-d="down"] { grid-column: 2; grid-row: 3; margin-top: -9px; }
 
       /* Confini terrestri e marini: un'unica linea bianca sottile, uguale a ogni zoom
          (vector-effect evita che il bordo diventi una fascia spessa ingrandendo la mappa) */
