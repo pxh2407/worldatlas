@@ -337,14 +337,14 @@
               "<b>Pick a country</b>: click a country on the map (or in the list below) to see its data. A red arrow shows where it is.",
               "<b>See the country file</b>: after picking a country, <b>scroll down</b> (below the map) to read all its details: flag, capital, population, economic data and more.",
               "<b>Zoom</b>: use the <b>+</b> and <b>&minus;</b> buttons at the top left of the map (<b>&#8635;</b> resets the view).",
-              "<b>Move the map</b>: the quickest way is the <b>arrows &#8593; &#8595; &#8592; &#8594;</b> at the bottom right of the map &mdash; each click shifts it right away. You can also drag with the hand by holding down over the sea (that way the map may take a couple of seconds to start).",
+              "<b>Move the map</b>: use the <b>arrows &#8593; &#8595; &#8592; &#8594;</b> at the bottom right of the map &mdash; each click shifts it right away.",
               "<b>Language</b>: the <b>IT / EN</b> button at the top right switches language.",
               "<b>Seas and oceans</b>: their names are written on the map; zoom in to read them better."
             ] : [
               "<b>Scegli un Paese</b>: clicca su un Paese sulla mappa (o nell'elenco in fondo) per vedere le sue informazioni. Una freccia rossa indica dove si trova.",
               "<b>Vedi la scheda del Paese</b>: dopo aver scelto un Paese, <b>scorri in basso</b> (sotto la mappa) per leggere tutti i suoi dati: bandiera, capitale, popolazione, dati economici e altro.",
               "<b>Ingrandisci</b>: usa i pulsanti <b>+</b> e <b>&minus;</b> in alto a sinistra sulla mappa (<b>&#8635;</b> riporta alla vista iniziale).",
-              "<b>Sposta la mappa</b>: il modo più rapido sono le <b>frecce &#8593; &#8595; &#8592; &#8594;</b> in basso a destra sulla mappa &mdash; ogni clic la sposta subito. In alternativa puoi trascinare con la manina tenendo premuto sul mare (così però la mappa può metterci un paio di secondi a partire).",
+              "<b>Sposta la mappa</b>: usa le <b>frecce &#8593; &#8595; &#8592; &#8594;</b> in basso a destra sulla mappa &mdash; ogni clic la sposta subito.",
               "<b>Lingua</b>: il pulsante <b>IT / EN</b> in alto a destra cambia la lingua.",
               "<b>Mari e oceani</b>: i loro nomi sono scritti sulla mappa; ingrandendo si leggono meglio."
             ];
@@ -398,6 +398,14 @@
             });
             if (getComputedStyle(frame).position === "static") frame.style.position = "relative";
             frame.appendChild(pad);
+          }
+          // Disabilita lo spostamento trascinando col mouse (resta solo lo spostamento con le frecce).
+          // Blocca solo i pointermove REALI (isTrusted); quelli simulati dal tastierino frecce passano.
+          function disableHandDrag() {
+            var svg = document.querySelector(".world-map") || document.querySelector(".map-frame svg") || document.querySelector("svg");
+            if (!svg || svg.__waNoDrag) return;
+            svg.__waNoDrag = true;
+            svg.addEventListener("pointermove", function (e) { if (e.isTrusted) e.stopImmediatePropagation(); }, true);
           }
           // Freccia che indica sulla mappa il Paese selezionato (utile per quelli minuscoli)
           function updateArrow() {
@@ -456,6 +464,7 @@
             addCredit();
             addHelp();
             addPad();
+            disableHandDrag();
             var aside = document.querySelector("aside.dossier") || document.querySelector(".dossier");
             if (!aside) return;
             var facts = aside.querySelector(".dossier-facts:not(.wa-demo):not(.wa-econ)");
@@ -521,7 +530,7 @@
             "Il mondo, a colpo d’occhio": "The world at a glance",
             "Coordinate come strumento narrativo": "Coordinates as a narrative tool",
             "PROIEZIONE MERCATOR · NORD IN ALTO": "MERCATOR PROJECTION · NORTH UP",
-            "TRASCINA PER PANORAMICA · PULSANTI + / - PER LO ZOOM": "DRAG TO PAN · + / - BUTTONS TO ZOOM",
+            "FRECCE PER SPOSTARE · PULSANTI + / - PER LO ZOOM": "ARROWS TO MOVE · + / - BUTTONS TO ZOOM",
             "Caricamento carta…": "Loading map…",
             "La carta non è disponibile al momento.": "The map is not available right now.",
             "Mappa politica interattiva del mondo. Trascina per spostarti, usa la rotella o i controlli per ingrandire.":
@@ -716,10 +725,8 @@
         cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDMyIDMyIj48ZyBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMTIiIHk9IjMiIHdpZHRoPSI1IiBoZWlnaHQ9IjE1IiByeD0iMi41Ii8+PHJlY3QgeD0iOSIgeT0iMTMiIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgcng9IjYiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTgiIHI9IjMiLz48L2c+PGcgZmlsbD0iIzExMTExMSI+PHJlY3QgeD0iMTIiIHk9IjMiIHdpZHRoPSI1IiBoZWlnaHQ9IjE1IiByeD0iMi41Ii8+PHJlY3QgeD0iOSIgeT0iMTMiIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgcng9IjYiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTgiIHI9IjMiLz48L2c+PC9zdmc+Cg==") 9 2, pointer !important;
       }
 
-      /* Sul mare (sfondo mappa) manina aperta: fa capire che lì si può "afferrare" e trascinare la mappa;
-         mentre trascini la manina si chiude. Sui Paesi resta la manina che punta (per selezionarli). */
-      .map-frame svg { cursor: grab !important; }
-      .map-frame svg:active { cursor: grabbing !important; }
+      /* Sul mare freccia normale: lo spostamento si fa con le frecce, non trascinando. Sui Paesi resta la manina. */
+      .map-frame svg { cursor: default !important; }
 
       /* Tastierino a frecce per spostare la mappa a scatti (alternativa rapida al trascinamento) */
       .wa-pad { position: absolute; right: 14px; bottom: 48px; z-index: 6; display: grid; grid-template-columns: repeat(3, 28px); grid-template-rows: repeat(3, 28px); gap: 2px; }
