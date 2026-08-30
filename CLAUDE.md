@@ -66,8 +66,10 @@ Le poche patch al bundle sono elencate nella sezione seguente.
 - **Scroll alla mappa alla selezione**: quando cambi Paese, `scrollToMap()` (in `index.html`, chiamata da
   `inject()` al variare del codice, con `lastSel`) porta la `.map-frame` in vista con `scrollIntoView({block:"center"})`,
   così vedi tutta la mappa col Paese evidenziato. Sostituisce lo scroll fisso `top:260` del bundle (tolto, patch #11).
-- **Freccia sul Paese selezionato** (`.wa-arrow`): quando selezioni un Paese, un piccolo triangolo (contorno scuro
-  `#1a2331`, interno trasparente) lo
+- **Freccia sul Paese selezionato** (`.wa-arrow`): quando selezioni un Paese, un piccolo triangolo stretto (contorno
+  scuro `#1a2331`, interno trasparente, punta in giù) con la **punta sul bordo nord reale** del Paese vicino al centro
+  orizzontale — calcolata campionando il path (`getPointAtLength`) per trovare il punto più alto della sagoma entro
+  una fascia attorno al centro-X (così su forme irregolari come la Cina la punta non resta sospesa sopra il vuoto). Lo
   indica sulla mappa — così anche i Paesi minuscoli (Kosovo, Vaticano, Singapore…), che come selezione sono solo
   un puntino, si trovano subito. Iniettata in `updateArrow()` (nello script di `index.html`): trova il path
   `.country-shape.is-selected`, ne calcola il centro con `getBBox()` e ci mette sopra la freccia, come figlia

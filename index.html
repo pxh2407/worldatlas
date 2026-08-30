@@ -412,7 +412,21 @@
             if (ex) ex.parentNode.removeChild(ex);
             var bb; try { bb = sel.getBBox(); } catch (e) { return; }
             if (!bb || (!bb.width && !bb.height)) return;
-            var cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2;
+            var cx = bb.x + bb.width / 2;
+            // Trova il punto più alto della sagoma vicino al centro orizzontale, così la punta della
+            // freccia cade sul VERO bordo nord del Paese (non nel vuoto sopra Paesi dalla forma irregolare).
+            var tipX = cx, tipY = bb.y;
+            try {
+              var len = sel.getTotalLength();
+              if (len > 0) {
+                var band = Math.max(bb.width * 0.09, 4), bestY = bb.y + bb.height + 1, bestX = cx, step = Math.max(1.5, len / 500), found = false, pt;
+                for (var s = 0; s <= len; s += step) {
+                  pt = sel.getPointAtLength(s);
+                  if (Math.abs(pt.x - cx) < band && pt.y < bestY) { bestY = pt.y; bestX = pt.x; found = true; }
+                }
+                if (found) { tipX = bestX; tipY = bestY; }
+              }
+            } catch (e) {}
             var NS = "http://www.w3.org/2000/svg";
             var g = document.createElementNS(NS, "g");
             g.setAttribute("class", "wa-arrow");
@@ -420,7 +434,7 @@
             g.setAttribute("pointer-events", "none");
             var w = 3.5, h = 11; // freccia (triangolo): la punta coincide col bordo superiore del Paese
             var tri = document.createElementNS(NS, "path");
-            tri.setAttribute("d", "M" + (cx - w) + " " + (bb.y - h) + " L" + (cx + w) + " " + (bb.y - h) + " L" + cx + " " + bb.y + " Z");
+            tri.setAttribute("d", "M" + (tipX - w) + " " + (tipY - h) + " L" + (tipX + w) + " " + (tipY - h) + " L" + tipX + " " + tipY + " Z");
             tri.setAttribute("fill", "none");
             tri.setAttribute("stroke", "#1a2331");
             tri.setAttribute("stroke-width", "1");
